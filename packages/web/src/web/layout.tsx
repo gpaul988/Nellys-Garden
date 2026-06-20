@@ -19,7 +19,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0e27]/80 backdrop-blur-md border-b border-[#2a2f48]">
+      <header className="sticky top-0 z-50 bg-[#0a0e27]/60 backdrop-blur-xl border-b border-[#d4a574]/20 shadow-xl shadow-[#00d9ff]/5 hover:border-[#00d9ff]/30 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-4 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
@@ -33,9 +33,10 @@ export function Layout({ children }: LayoutProps) {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[#b0b0b0] hover:text-[#d4a574] transition-colors duration-200"
+                className="text-[#b0b0b0] hover:text-[#00d9ff] font-semibold transition-all duration-200 relative group"
               >
                 {link.label}
+                <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] group-hover:w-full transition-all duration-300 rounded-full"></span>
               </a>
             ))}
           </nav>
