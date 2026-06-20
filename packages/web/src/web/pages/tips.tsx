@@ -1,4 +1,4 @@
-import { Droplets, Sun, Bug, Zap, Calendar, Wind, BarChart3, Activity } from 'lucide-react';
+import { Droplets, Sun, Bug, Zap, Calendar, Wind, BarChart3, Activity, ArrowRight } from 'lucide-react';
 
 const tips = [
   {
@@ -88,6 +88,8 @@ const tips = [
 ];
 
 export default function Tips() {
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid relative overflow-hidden">
       {/* Dynamic Background */}
@@ -218,6 +220,22 @@ export default function Tips() {
                 <p className="text-[#b0b0b0] font-light leading-relaxed">{faq.a}</p>
               </div>
             ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-12 justify-center">
+            <button 
+              onClick={() => window.location.href = '/plants'}
+              className="px-8 py-4 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white font-black rounded-lg hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all cursor-pointer hover:scale-105 transform flex items-center gap-2"
+            >
+              VIEW PLANTS <ArrowRight size={20} />
+            </button>
+            <button 
+              onClick={() => window.location.href = '/resources'}
+              className="px-8 py-4 border-2 border-[#d4a574] text-[#d4a574] font-black rounded-lg hover:bg-[#d4a574]/10 transition-all cursor-pointer hover:border-[#00d9ff] hover:text-[#00d9ff]"
+            >
+              RESOURCES & CALENDAR
+            </button>
           </div>
         </div>
       </section>

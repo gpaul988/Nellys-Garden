@@ -25,8 +25,11 @@ export default function Community() {
           <p className="text-[#b0b0b0] text-lg font-light max-w-2xl">
             Connected gardeners. Shared victories. Real-time cultivation telemetry. 2,800+ nodes active.
           </p>
-          <button className="px-8 py-3 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white rounded-lg font-black hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all btn-cyber">
-            BROADCAST MESSAGE
+          <button 
+            onClick={() => window.location.href = '/contact'}
+            className="px-8 py-3 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white rounded-lg font-black hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all btn-cyber cursor-pointer hover:scale-105 transform"
+          >
+            SHARE YOUR STORY
           </button>
         </div>
       </section>

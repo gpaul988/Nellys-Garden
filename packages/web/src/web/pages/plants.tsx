@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, Zap, TrendingUp, Database } from 'lucide-react';
+import { Search, Filter, Zap, TrendingUp, Database, ArrowRight } from 'lucide-react';
 
 interface Plant {
   id: string;
@@ -256,6 +256,22 @@ export default function Plants() {
               <p className="text-[#d4a574] text-sm mt-2 font-light">Try different search parameters</p>
             </div>
           )}
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-12 justify-center">
+            <button 
+              onClick={() => window.location.href = '/tips'}
+              className="px-8 py-4 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white font-black rounded-lg hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all cursor-pointer hover:scale-105 transform flex items-center gap-2"
+            >
+              GROWING TIPS <ArrowRight size={20} />
+            </button>
+            <button 
+              onClick={() => window.location.href = '/community'}
+              className="px-8 py-4 border-2 border-[#d4a574] text-[#d4a574] font-black rounded-lg hover:bg-[#d4a574]/10 transition-all cursor-pointer hover:border-[#00d9ff] hover:text-[#00d9ff]"
+            >
+              COMMUNITY
+            </button>
+          </div>
         </div>
       </section>
     </div>

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send, Zap, Shield, Cpu } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Zap, Shield, Cpu, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
@@ -202,6 +202,22 @@ export default function Contact() {
                 <p className="text-[#b0b0b0] font-light leading-relaxed">{faq.a}</p>
               </div>
             ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-12 justify-center">
+            <button 
+              onClick={() => window.location.href = '/plants'}
+              className="px-8 py-4 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white font-black rounded-lg hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all cursor-pointer hover:scale-105 transform flex items-center gap-2"
+            >
+              EXPLORE PLANTS <ArrowRight size={20} />
+            </button>
+            <button 
+              onClick={() => window.location.href = '/community'}
+              className="px-8 py-4 border-2 border-[#d4a574] text-[#d4a574] font-black rounded-lg hover:bg-[#d4a574]/10 transition-all cursor-pointer hover:border-[#00d9ff] hover:text-[#00d9ff]"
+            >
+              COMMUNITY
+            </button>
           </div>
         </div>
       </section>
