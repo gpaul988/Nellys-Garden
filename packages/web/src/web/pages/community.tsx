@@ -1,5 +1,6 @@
 import { Heart, Share2, MessageSquare, Zap, TrendingUp, Users } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { StoryModal } from '../components/story-modal';
 
 interface Story {
   id: string;
@@ -13,6 +14,7 @@ interface Story {
 export default function Community() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
+  const [storyModalOpen, setStoryModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -50,7 +52,7 @@ export default function Community() {
             Connected gardeners. Shared victories. Real-time cultivation telemetry. 2,800+ nodes active.
           </p>
           <button 
-            onClick={() => window.location.href = '/contact'}
+            onClick={() => setStoryModalOpen(true)}
             className="px-8 py-3 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white rounded-lg font-black hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all btn-cyber cursor-pointer hover:scale-105 transform"
           >
             SHARE YOUR STORY
@@ -174,6 +176,20 @@ export default function Community() {
           </div>
         </div>
       </section>
+
+      {/* Story Submission Modal */}
+      <StoryModal 
+        isOpen={storyModalOpen}
+        onClose={() => setStoryModalOpen(false)}
+        onStorySubmitted={async () => {
+          // Refresh stories after submission
+          const response = await fetch('/api/stories');
+          if (response.ok) {
+            const data = await response.json();
+            setStories(data);
+          }
+        }}
+      />
     </div>
   );
 }
