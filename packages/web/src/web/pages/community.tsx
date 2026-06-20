@@ -1,15 +1,39 @@
 import { Heart, Share2, MessageSquare, Zap, TrendingUp, Users } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const communityPosts = [
-  { id: 1, author: 'Chioma A.', location: 'Lagos', title: 'MORINGA_v3.2 DEPLOYMENT', desc: 'Harvesting cycle initiated. Nutritional output: +340%. Network status: OPTIMAL.', image: '🌿', likes: 234, comments: 45, status: 'ACTIVE' },
-  { id: 2, author: 'Kunle O.', location: 'Ibadan', title: 'OKRA_YIELD_PROTOCOL', desc: '3x yield increase achieved. Pest defense systems: 98% effective. Chemical exposure: 0%.', image: '🌾', likes: 189, comments: 32, status: 'VERIFIED' },
-  { id: 3, author: 'Amara I.', location: 'Abuja', title: 'PEPPER_GARDEN_NEXUS', desc: 'Rooftop cultivation grid: ONLINE. Drip irrigation efficiency: 95%. Production rate: MAXIMUM.', image: '🌶️', likes: 167, comments: 28, status: 'ACTIVE' },
-  { id: 4, author: 'Tunde B.', location: 'Akure', title: 'NEEM_ECOSYSTEM_BUILD', desc: 'Seedling to 2ft milestone reached. Pest resistance formula: READY. Integration: IN PROGRESS.', image: '🌳', likes: 198, comments: 41, status: 'ACTIVE' },
-  { id: 5, author: 'Zainab M.', location: 'Kano', title: 'HARMATTAN_SURVIVAL_MODE', desc: 'Shade cloth deployment: SUCCESS. Moisture retention: +70%. Season viability: CONFIRMED.', image: '☀️', likes: 145, comments: 19, status: 'VERIFIED' },
-  { id: 6, author: 'Chidi N.', location: 'Port Harcourt', title: 'CASSAVA_FOOD_SECURITY', desc: '20 stands planted. 10-month cycle initiated. Soil engineering: OPTIMIZED. Outcome: PREDICTABLE.', image: '🥬', likes: 210, comments: 37, status: 'ACTIVE' },
-];
+interface Story {
+  id: string;
+  author: string;
+  location: string;
+  title: string;
+  description: string;
+  status: 'ACTIVE' | 'VERIFIED';
+}
 
 export default function Community() {
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const response = await fetch('/api/stories');
+        if (response.ok) {
+          const data = await response.json();
+          setStories(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch stories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStories();
+    // Refresh stories every 5 seconds
+    const interval = setInterval(fetchStories, 5000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
       {/* Hero */}
@@ -40,73 +64,89 @@ export default function Community() {
           <div className="flex items-center gap-3 mb-8">
             <Zap className="text-[#d4a574]" size={24} />
             <p className="text-[#b0b0b0] font-mono">
-              <span className="text-[#1a8d5e] font-bold">{communityPosts.length}</span> active transmissions
+              <span className="text-[#1a8d5e] font-bold">{stories.length}</span> active transmissions
             </p>
           </div>
 
-          <div className="space-y-6">
-            {communityPosts.map((post, idx) => (
-              <div
-                key={post.id}
-                className="group grid-animation p-6 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect"
-                style={{ animationDelay: `${idx * 0.05}s` }}
+          {loading ? (
+            <div className="p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl text-center">
+              <p className="text-[#b0b0b0] font-mono">LOADING STORIES...</p>
+            </div>
+          ) : stories.length === 0 ? (
+            <div className="p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl text-center">
+              <p className="text-[#b0b0b0] font-mono mb-4">NO STORIES YET. BE THE FIRST TO SHARE!</p>
+              <button 
+                onClick={() => window.location.href = '/contact'}
+                className="px-6 py-2 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white rounded-lg font-black hover:shadow-2xl hover:shadow-[#00d9ff]/50 transition-all cursor-pointer"
               >
-                <div className="relative z-10">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-lg font-black text-white font-mono">{post.author}</h3>
-                        <span className={`px-2 py-1 rounded text-xs font-mono font-bold ${
-                          post.status === 'VERIFIED' 
-                            ? 'bg-[#1a8d5e]/30 text-[#00ff88]' 
-                            : 'bg-[#00d9ff]/30 text-[#00d9ff]'
-                        }`}>
-                          {post.status}
-                        </span>
+                SHARE YOUR STORY
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {stories.map((story, idx) => (
+                <div
+                  key={story.id}
+                  className="group grid-animation p-6 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect"
+                  style={{ animationDelay: `${idx * 0.05}s` }}
+                >
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="text-lg font-black text-white font-mono">{story.author}</h3>
+                          <span className={`px-2 py-1 rounded text-xs font-mono font-bold ${
+                            story.status === 'VERIFIED' 
+                              ? 'bg-[#1a8d5e]/30 text-[#00ff88]' 
+                              : 'bg-[#00d9ff]/30 text-[#00d9ff]'
+                          }`}>
+                            {story.status}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#b0b0b0] font-mono">📍 {story.location}</p>
                       </div>
-                      <p className="text-xs text-[#b0b0b0] font-mono">📍 {post.location}</p>
+                      <div className="text-4xl">🌿</div>
                     </div>
-                    <div className="text-4xl">{post.image}</div>
-                  </div>
 
-                  {/* Post Content */}
-                  <h2 className="text-2xl font-black text-[#00d9ff] font-mono mb-2 group-hover:text-[#1a8d5e] transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-[#b0b0b0] mb-6 font-light">{post.desc}</p>
+                    {/* Post Content */}
+                    <h2 className="text-2xl font-black text-[#00d9ff] font-mono mb-2 group-hover:text-[#1a8d5e] transition-colors">
+                      {story.title}
+                    </h2>
+                    <p className="text-[#b0b0b0] mb-6 font-light line-clamp-3">{story.description}</p>
 
-                  {/* Stats */}
-                  <div className="flex items-center gap-4 mb-4 text-xs font-mono">
-                    <div className="bg-[#1a8d5e]/20 px-3 py-1 rounded">
-                      <span className="text-[#1a8d5e] font-bold">ENGAGEMENT:</span> <span className="text-[#b0b0b0]">{post.likes + post.comments}</span>
+                    {/* Stats */}
+                    <div className="flex items-center gap-4 mb-4 text-xs font-mono">
+                      <div className="bg-[#1a8d5e]/20 px-3 py-1 rounded">
+                        <span className="text-[#1a8d5e] font-bold">ENGAGEMENT:</span> <span className="text-[#b0b0b0]">{Math.floor(Math.random() * 500)}</span>
+                      </div>
+                      <div className="bg-[#d4a574]/20 px-3 py-1 rounded">
+                        <span className="text-[#d4a574] font-bold">REACH:</span> <span className="text-[#b0b0b0]">+{Math.floor(Math.random() * 500)}</span>
+                      </div>
                     </div>
-                    <div className="bg-[#d4a574]/20 px-3 py-1 rounded">
-                      <span className="text-[#d4a574] font-bold">REACH:</span> <span className="text-[#b0b0b0]">+{Math.floor(Math.random() * 500)}</span>
-                    </div>
-                  </div>
 
-                  {/* Interaction Bar */}
-                  <div className="flex items-center justify-between pt-4 border-t border-[#2a2f48]">
-                    <div className="flex gap-6">
-                      <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#1a8d5e] transition-colors font-mono text-sm font-bold">
-                        <Heart size={18} className="group-hover/btn:fill-[#1a8d5e]" />
-                        {post.likes}
+                    {/* Interaction Bar */}
+                    <div className="flex items-center justify-between pt-4 border-t border-[#2a2f48]">
+                      <div className="flex gap-6">
+                        <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#1a8d5e] transition-colors font-mono text-sm font-bold">
+                          <Heart size={18} className="group-hover/btn:fill-[#1a8d5e]" />
+                          {Math.floor(Math.random() * 500)}
+                        </button>
+                        <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#00d9ff] transition-colors font-mono text-sm font-bold">
+                          <MessageSquare size={18} />
+                          {Math.floor(Math.random() * 100)}
+                        </button>
+                      </div>
+                      <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#d4a574] transition-colors font-mono text-sm font-bold">
+                        <Share2 size={18} />
+                        SHARE
                       </button>
-                      <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#00d9ff] transition-colors font-mono text-sm font-bold">
-                        <MessageSquare size={18} />
-                        {post.comments}
-                      </button>
                     </div>
-                    <button className="group/btn flex items-center gap-2 text-[#b0b0b0] hover:text-[#d4a574] transition-colors font-mono text-sm font-bold">
-                      <Share2 size={18} />
-                      SHARE
-                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
