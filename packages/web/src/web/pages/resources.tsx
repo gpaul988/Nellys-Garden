@@ -1,58 +1,84 @@
-import { Calendar, Droplet, Leaf, AlertCircle, CheckCircle } from 'lucide-react';
+import { Calendar, Droplet, Leaf, AlertCircle, CheckCircle, TrendingUp, Gauge, Clock } from 'lucide-react';
 
 export default function Resources() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27]">
-      {/* Hero Section */}
-      <section className="py-16 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold text-white mb-4">Garden Resources</h1>
-          <p className="text-[#b0b0b0] text-lg">
-            Essential guides, tools, and information for Nigerian gardeners.
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00d9ff]/5 to-[#1a8d5e]/10"></div>
+      </div>
+
+      {/* Hero */}
+      <section className="relative py-20 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-6xl mx-auto space-y-8 animate-float-up-animation">
+          <div className="flex items-center gap-4">
+            <Gauge className="text-[#00d9ff]" size={40} />
+            <div>
+              <p className="text-[#d4a574] font-mono text-sm font-bold">OPERATIONAL DASHBOARD</p>
+              <h1 className="text-5xl md:text-6xl font-black text-white font-mono">RESOURCE HUB</h1>
+            </div>
+          </div>
+          <p className="text-[#b0b0b0] text-lg font-light max-w-2xl">
+            Complete operational data. Calendar integration, soil specifications, water protocols, and equipment manifesto.
           </p>
         </div>
       </section>
 
       {/* Planting Calendar */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <Calendar className="text-[#00d9ff]" size={32} />
-            <h2 className="text-3xl font-bold text-white">Annual Planting Calendar</h2>
+      <section className="relative py-16 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="flex items-center gap-3">
+            <Calendar className="text-[#1a8d5e]" size={32} />
+            <h2 className="text-4xl font-black text-white font-mono">ANNUAL SCHEDULE</h2>
           </div>
+
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="border-b border-[#2a2f48]">
-                  <th className="px-4 py-3 text-left text-[#d4a574] font-semibold">Month</th>
-                  <th className="px-4 py-3 text-left text-[#d4a574] font-semibold">Best Crops</th>
-                  <th className="px-4 py-3 text-left text-[#d4a574] font-semibold">Season</th>
+                <tr className="border-b-2 border-[#d4a574]/50">
+                  <th className="px-4 py-4 text-left">
+                    <span className="text-[#00d9ff] font-mono font-black">MONTH</span>
+                  </th>
+                  <th className="px-4 py-4 text-left">
+                    <span className="text-[#1a8d5e] font-mono font-black">CROPS</span>
+                  </th>
+                  <th className="px-4 py-4 text-left">
+                    <span className="text-[#d4a574] font-mono font-black">SEASON</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { month: 'January', crops: 'Tomato, Pepper, Spinach, Carrot', season: 'Dry' },
-                  { month: 'February', crops: 'Pepper, Onion, Lettuce, Cucumber', season: 'Dry' },
-                  { month: 'March', crops: 'Okra, Cassava (prep), Melon', season: 'Dry→Wet' },
-                  { month: 'April', crops: 'Okra, Cassava, Yam, Cucumber', season: 'Wet' },
-                  { month: 'May', crops: 'Okra, Beans, Maize, Pumpkin', season: 'Wet' },
-                  { month: 'June', crops: 'Okra, Beans, Leafy greens, Rice', season: 'Wet' },
-                  { month: 'July', crops: 'Okra, Watermelon, Squash', season: 'Wet' },
-                  { month: 'August', crops: 'Okra, Melon, Late beans', season: 'Wet' },
-                  { month: 'September', crops: 'Cassava, Yam, Leafy greens', season: 'Wet' },
-                  { month: 'October', crops: 'Cassava, Tomato (start), Pepper (start)', season: 'Wet→Dry' },
-                  { month: 'November', crops: 'Tomato, Pepper, Carrot, Onion', season: 'Dry' },
-                  { month: 'December', crops: 'Tomato, Pepper, Spinach, Lettuce', season: 'Dry' },
-                ].map((row) => (
-                  <tr key={row.month} className="border-b border-[#2a2f48] hover:bg-white/5">
-                    <td className="px-4 py-3 text-white font-semibold">{row.month}</td>
-                    <td className="px-4 py-3 text-[#b0b0b0]">{row.crops}</td>
-                    <td className="px-4 py-3">
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        row.season === 'Dry' 
-                          ? 'bg-[#d4a574]/20 text-[#d4a574]' 
-                          : 'bg-[#00d9ff]/20 text-[#00d9ff]'
-                      }`}>
+                  { month: 'JANUARY', crops: 'Tomato, Pepper, Spinach, Carrot', season: 'DRY' },
+                  { month: 'FEBRUARY', crops: 'Pepper, Onion, Lettuce, Cucumber', season: 'DRY' },
+                  { month: 'MARCH', crops: 'Okra, Cassava (prep), Melon', season: 'TRANSITION' },
+                  { month: 'APRIL', crops: 'Okra, Cassava, Yam, Cucumber', season: 'WET' },
+                  { month: 'MAY', crops: 'Okra, Beans, Maize, Pumpkin', season: 'WET' },
+                  { month: 'JUNE', crops: 'Okra, Beans, Leafy greens, Rice', season: 'WET' },
+                  { month: 'JULY', crops: 'Okra, Watermelon, Squash', season: 'WET' },
+                  { month: 'AUGUST', crops: 'Okra, Melon, Late beans', season: 'WET' },
+                  { month: 'SEPTEMBER', crops: 'Cassava, Yam, Leafy greens', season: 'WET' },
+                  { month: 'OCTOBER', crops: 'Cassava, Tomato (start), Pepper', season: 'TRANSITION' },
+                  { month: 'NOVEMBER', crops: 'Tomato, Pepper, Carrot, Onion', season: 'DRY' },
+                  { month: 'DECEMBER', crops: 'Tomato, Pepper, Spinach', season: 'DRY' },
+                ].map((row, i) => (
+                  <tr
+                    key={row.month}
+                    className="border-b border-[#2a2f48] hover:bg-[#1a8d5e]/10 transition-all group grid-animation"
+                    style={{ animationDelay: `${i * 0.03}s` }}
+                  >
+                    <td className="px-4 py-4 text-white font-bold font-mono group-hover:text-[#00d9ff] transition-colors">{row.month}</td>
+                    <td className="px-4 py-4 text-[#b0b0b0] font-light">{row.crops}</td>
+                    <td className="px-4 py-4">
+                      <span
+                        className={`px-3 py-1 rounded-lg text-xs font-mono font-bold ${
+                          row.season === 'DRY'
+                            ? 'bg-[#d4a574]/30 text-[#d4a574]'
+                            : row.season === 'WET'
+                            ? 'bg-[#00d9ff]/30 text-[#00d9ff]'
+                            : 'bg-[#1a8d5e]/30 text-[#1a8d5e]'
+                        }`}
+                      >
                         {row.season}
                       </span>
                     </td>
@@ -64,50 +90,59 @@ export default function Resources() {
         </div>
       </section>
 
-      {/* Soil Guide */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24 bg-gradient-to-r from-[#1a8d5e]/10 to-[#00d9ff]/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <Leaf className="text-[#1a8d5e]" size={32} />
-            <h2 className="text-3xl font-bold text-white">Soil Guide for Nigeria</h2>
+      {/* Soil Specifications */}
+      <section className="relative py-16 px-6 sm:px-12 lg:px-24 z-10 bg-gradient-to-r from-[#1a8d5e]/5 to-transparent">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="flex items-center gap-3">
+            <Leaf className="text-[#d4a574]" size={32} />
+            <h2 className="text-4xl font-black text-white font-mono">SOIL MATRIX</h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                title: 'Ideal Soil Mix',
-                items: [
-                  '40% Loamy soil',
-                  '30% Compost/Organic matter',
-                  '20% Sand (for drainage)',
-                  '10% Mulch (grass, leaves)',
+                title: 'COMPOSITION',
+                specs: [
+                  '40% Loamy Soil',
+                  '30% Compost/Organic',
+                  '20% Sand (drainage)',
+                  '10% Mulch Layer',
                 ],
               },
               {
-                title: 'Soil Preparation',
-                items: [
-                  'Mix thoroughly before planting',
-                  'Add 5-10kg compost per m²',
-                  'Add chicken manure (2-3kg per m²)',
-                  'Let settle for 1-2 weeks',
+                title: 'PREPARATION',
+                specs: [
+                  'Mix thoroughly before',
+                  '5-10kg compost per m²',
+                  '2-3kg chicken manure',
+                  'Settle: 1-2 weeks',
                 ],
               },
               {
-                title: 'Maintenance',
-                items: [
-                  'Add compost every 3-4 months',
-                  'Rotate crops yearly',
-                  'Mulch to prevent erosion',
-                  'Test pH annually if possible',
+                title: 'MAINTENANCE',
+                specs: [
+                  'Compost every 3-4 mo',
+                  'Crop rotation yearly',
+                  'Mulch application',
+                  'pH test annually',
                 ],
               },
             ].map((section, i) => (
-              <div key={i} className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-                <h3 className="font-semibold text-white mb-3">{section.title}</h3>
-                <ul className="space-y-2">
-                  {section.items.map((item, j) => (
-                    <li key={j} className="flex gap-2 text-[#b0b0b0] text-sm">
+              <div
+                key={i}
+                className="grid-animation p-8 glass-pro border-2 border-[#d4a574]/50 hover:border-[#00d9ff]/80 rounded-xl transition-all hover-lift"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <h3 className="font-black text-white font-mono mb-6 text-lg flex items-center gap-2">
+                  <span className="text-[#1a8d5e]">{'['}</span>
+                  {section.title}
+                  <span className="text-[#1a8d5e]">{']'}</span>
+                </h3>
+                <ul className="space-y-3">
+                  {section.specs.map((spec, j) => (
+                    <li key={j} className="flex gap-3 text-[#b0b0b0] text-sm font-light">
                       <CheckCircle size={16} className="text-[#1a8d5e] flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                      <span>{spec}</span>
                     </li>
                   ))}
                 </ul>
@@ -118,64 +153,90 @@ export default function Resources() {
       </section>
 
       {/* Water Management */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
+      <section className="relative py-16 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="flex items-center gap-3">
             <Droplet className="text-[#00d9ff]" size={32} />
-            <h2 className="text-3xl font-bold text-white">Water Management</h2>
+            <h2 className="text-4xl font-black text-white font-mono">HYDRO SYSTEM</h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-[#d4a574]">Dry Season</span> (Nov-Mar)
-              </h3>
-              <ul className="space-y-2 text-[#b0b0b0] text-sm">
-                <li>• Water daily (morning 5-7 AM)</li>
-                <li>• Check soil moisture before watering</li>
-                <li>• Water deeply, not frequently</li>
-                <li>• Use drip irrigation if available</li>
-                <li>• Heavy mulching to retain moisture</li>
-                <li>• Increase shade cloth usage</li>
-              </ul>
+            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect">
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <Clock className="text-[#d4a574]" size={28} />
+                  <h3 className="text-2xl font-black text-white font-mono">DRY PHASE</h3>
+                </div>
+                <ul className="space-y-3">
+                  {[
+                    'Water: Daily (5-7 AM)',
+                    'Depth: Soil moisture check',
+                    'Method: Deep, not frequent',
+                    'Irrigation: Drip if available',
+                    'Mulch: Heavy layer required',
+                    'Frequency: Every morning',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[#b0b0b0] text-sm font-light">
+                      <span className="text-[#1a8d5e] font-bold">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 pt-6 border-t border-[#d4a574]/20">
+                  <TrendingUp className="text-[#00ff88] mb-2" size={20} />
+                  <p className="text-xs font-mono text-[#00ff88] font-bold">EFFICIENCY: 70-80%</p>
+                </div>
+              </div>
             </div>
-            <div className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-[#00d9ff]">Wet Season</span> (Apr-Oct)
-              </h3>
-              <ul className="space-y-2 text-[#b0b0b0] text-sm">
-                <li>• Reduce watering frequency</li>
-                <li>• Ensure excellent drainage</li>
-                <li>• Avoid waterlogging (root rot risk)</li>
-                <li>• Use raised beds in low areas</li>
-                <li>• Monitor rainfall patterns</li>
-                <li>• Clear gutters for water flow</li>
-              </ul>
+
+            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e]/80 transition-all hover-lift overflow-hidden scan-line-effect" style={{ animationDelay: '0.1s' }}>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <AlertCircle className="text-[#00d9ff]" size={28} />
+                  <h3 className="text-2xl font-black text-white font-mono">WET PHASE</h3>
+                </div>
+                <ul className="space-y-3">
+                  {[
+                    'Water: Reduce frequency',
+                    'Drainage: Excellent critical',
+                    'Risk: Root rot prevention',
+                    'Method: Raised beds preferred',
+                    'Monitor: Rainfall patterns',
+                    'Action: Clear gutters always',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[#b0b0b0] text-sm font-light">
+                      <span className="text-[#00d9ff] font-bold">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 pt-6 border-t border-[#d4a574]/20">
+                  <Gauge className="text-[#ff6b6b] mb-2" size={20} />
+                  <p className="text-xs font-mono text-[#ff6b6b] font-bold">RISK LEVEL: MONITOR</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Tools & Equipment */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24">
+      {/* Equipment */}
+      <section className="relative py-16 px-6 sm:px-12 lg:px-24 z-10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">Essential Garden Tools</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h2 className="text-4xl font-black text-white font-mono mb-8">EQUIPMENT MANIFEST</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
-              'Spade/Shovel',
-              'Garden hoe',
-              'Watering can',
-              'Pruning shears',
-              'Rake',
-              'Pitchfork',
-              'Gloves',
-              'Wheelbarrow',
-              'Sprayer (for pesticide)',
-              'Garden fork',
-              'Measuring tape',
-              'Sieve (for soil)',
-            ].map((tool) => (
-              <div key={tool} className="p-4 bg-white/5 border border-[#2a2f48] rounded-lg text-center">
-                <p className="text-white font-medium">{tool}</p>
+              'Spade/Shovel', 'Garden Hoe', 'Watering Can', 'Pruning Shears',
+              'Rake', 'Pitchfork', 'Gloves', 'Wheelbarrow',
+              'Sprayer', 'Garden Fork', 'Measuring Tape', 'Sieve',
+            ].map((tool, i) => (
+              <div
+                key={tool}
+                className="grid-animation p-4 glass-pro border-2 border-[#d4a574]/40 rounded-lg text-center hover:border-[#00d9ff] transition-all hover-lift group"
+                style={{ animationDelay: `${i * 0.03}s` }}
+              >
+                <p className="text-white font-black font-mono group-hover:text-[#00d9ff] transition-colors">{tool}</p>
+                <div className="h-1 w-0 bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] mt-2 mx-auto group-hover:w-full transition-all rounded-full"></div>
               </div>
             ))}
           </div>

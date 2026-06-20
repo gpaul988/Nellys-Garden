@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Zap, Shield, Cpu } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
@@ -25,128 +25,139 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27]">
-      {/* Hero Section */}
-      <section className="py-16 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold text-white mb-4">Get in Touch</h1>
-          <p className="text-[#b0b0b0] text-lg">
-            Have questions about gardening? Want to collaborate? We'd love to hear from you.
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#00d9ff]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#1a8d5e]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      {/* Hero */}
+      <section className="relative py-20 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-6xl mx-auto space-y-8 animate-float-up-animation">
+          <div className="flex items-center gap-4">
+            <Cpu className="text-[#d4a574]" size={40} />
+            <div>
+              <p className="text-[#1a8d5e] font-mono text-sm font-bold">COMMUNICATION INTERFACE</p>
+              <h1 className="text-5xl md:text-6xl font-black text-white font-mono">CONTACT PROTOCOL</h1>
+            </div>
+          </div>
+          <p className="text-[#b0b0b0] text-lg font-light max-w-2xl">
+            Direct gateway to the Nellys-Garden command center. Submit inquiries, collaboration proposals, or feedback.
           </p>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+      {/* Main Section */}
+      <section className="relative py-12 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div className="lg:col-span-1 space-y-6">
-            <div className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-              <div className="flex items-start gap-4">
-                <Mail className="text-[#00d9ff] flex-shrink-0" size={24} />
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Email</h3>
-                  <p className="text-[#b0b0b0]">hello@nellysgarden.ng</p>
+            {[
+              { icon: Mail, label: 'EMAIL', value: 'hello@nellysgarden.ng', color: 'from-[#00d9ff]' },
+              { icon: Phone, label: 'PHONE', value: '+234 (0) 123 456 7890', color: 'from-[#1a8d5e]' },
+              { icon: MapPin, label: 'LOCATION', value: 'Lagos, Nigeria', color: 'from-[#d4a574]' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`group grid-animation p-6 glass-pro border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect`}
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <div className="relative z-10">
+                  <div className={`p-3 w-fit rounded-lg bg-gradient-to-br ${item.color} to-transparent mb-4`}>
+                    <item.icon className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-black text-white font-mono mb-2 group-hover:text-[#00d9ff] transition-colors">{item.label}</h3>
+                  <p className="text-[#b0b0b0] font-light">{item.value}</p>
                 </div>
               </div>
-            </div>
+            ))}
 
-            <div className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-              <div className="flex items-start gap-4">
-                <Phone className="text-[#1a8d5e] flex-shrink-0" size={24} />
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Phone</h3>
-                  <p className="text-[#b0b0b0]">+234 (0) 123 456 7890</p>
-                </div>
+            {/* Security Badge */}
+            <div className="p-6 glass-pro border-2 border-[#1a8d5e]/50 rounded-xl">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="text-[#1a8d5e]" size={20} />
+                <p className="text-white font-mono font-bold">ENCRYPTED</p>
               </div>
-            </div>
-
-            <div className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg">
-              <div className="flex items-start gap-4">
-                <MapPin className="text-[#d4a574] flex-shrink-0" size={24} />
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Location</h3>
-                  <p className="text-[#b0b0b0]">Lagos, Nigeria</p>
-                </div>
-              </div>
+              <p className="text-xs text-[#b0b0b0] font-light">All transmissions secured & encrypted</p>
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <div className="lg:col-span-2">
             <form
               onSubmit={handleSubmit}
-              className="p-8 rounded-lg bg-white/5 border border-[#d4a574]/20 backdrop-blur-sm"
+              className="p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e] transition-all overflow-hidden scan-line-effect"
             >
               <div className="space-y-6">
                 {/* Name */}
-                <div>
-                  <label className="block text-white font-semibold mb-2">Full Name</label>
+                <div className="group">
+                  <label className="block text-white font-black font-mono mb-2">IDENTIFIER</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-[#d4a574]/20 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff]/40 transition-colors"
-                    placeholder="Your name"
+                    placeholder="Your designation"
+                    className="w-full px-4 py-3 bg-[#0f1335]/60 border-2 border-[#d4a574]/40 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 transition-all font-mono"
                   />
                 </div>
 
                 {/* Email */}
-                <div>
-                  <label className="block text-white font-semibold mb-2">Email Address</label>
+                <div className="group">
+                  <label className="block text-white font-black font-mono mb-2">TRANSMISSION ADDRESS</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-[#d4a574]/20 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff]/40 transition-colors"
-                    placeholder="your@email.com"
+                    placeholder="your@nexus.com"
+                    className="w-full px-4 py-3 bg-[#0f1335]/60 border-2 border-[#d4a574]/40 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 transition-all font-mono"
                   />
                 </div>
 
                 {/* Subject */}
-                <div>
-                  <label className="block text-white font-semibold mb-2">Subject</label>
+                <div className="group">
+                  <label className="block text-white font-black font-mono mb-2">SUBJECT CODE</label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-[#d4a574]/20 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff]/40 transition-colors"
-                    placeholder="What's this about?"
+                    placeholder="What is this about?"
+                    className="w-full px-4 py-3 bg-[#0f1335]/60 border-2 border-[#d4a574]/40 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 transition-all font-mono"
                   />
                 </div>
 
                 {/* Message */}
-                <div>
-                  <label className="block text-white font-semibold mb-2">Message</label>
+                <div className="group">
+                  <label className="block text-white font-black font-mono mb-2">DATA PAYLOAD</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white/10 border border-[#d4a574]/20 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff]/40 transition-colors resize-none"
-                    placeholder="Tell us your thoughts..."
+                    placeholder="Transmit your message..."
+                    className="w-full px-4 py-3 bg-[#0f1335]/60 border-2 border-[#d4a574]/40 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 transition-all resize-none font-mono"
                   />
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full px-8 py-3 bg-gradient-to-r from-[#1a8d5e] to-[#00ff88] text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#00ff88]/30 transition-all duration-200"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-[#1a8d5e] via-[#00ff88] to-[#00d9ff] text-[#0a0e27] rounded-lg font-black font-mono flex items-center justify-center gap-2 hover:shadow-2xl hover:shadow-[#00d9ff]/60 transition-all btn-cyber transform hover:scale-105"
                 >
-                  Send Message <Send size={18} />
+                  INITIALIZE TRANSMISSION <Send size={20} />
                 </button>
 
                 {/* Success Message */}
                 {submitted && (
-                  <div className="p-4 bg-[#1a8d5e]/20 border border-[#1a8d5e] rounded-lg text-[#00ff88]">
-                    ✓ Thank you! We'll get back to you soon.
+                  <div className="p-4 glass-pro border-2 border-[#1a8d5e] rounded-lg text-[#00ff88] font-mono font-bold">
+                    ✓ TRANSMISSION RECEIVED. PROCESSING INITIATED.
                   </div>
                 )}
               </div>
@@ -155,35 +166,40 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 px-6 sm:px-12 lg:px-24 bg-gradient-to-r from-[#1a8d5e]/10 to-[#00d9ff]/10">
+      {/* FAQ */}
+      <section className="relative py-16 px-6 sm:px-12 lg:px-24 z-10 bg-gradient-to-r from-[#1a8d5e]/5 to-[#00d9ff]/5">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">Frequently Asked Questions</h2>
+          <h2 className="text-4xl font-black text-white font-mono mb-8">
+            <span className="text-[#d4a574]">{'<'}</span> FAQ DIRECTORY <span className="text-[#d4a574]">{'/>'}</span>
+          </h2>
           <div className="space-y-4">
             {[
               {
-                q: 'How can I contribute to Nellys-Garden?',
-                a: 'Share your photos, tips, and success stories with the community! Email us at hello@nellysgarden.ng to become a contributor.',
+                q: 'HOW CAN I CONTRIBUTE TO THE NEXUS?',
+                a: 'Submit photos, protocols, and cultivation reports. Email hello@nellysgarden.ng with your proposal.',
               },
               {
-                q: 'Do you offer gardening consultations?',
-                a: 'Yes! We offer personalized advice for Nigerian garden setups. Contact us with your location and garden details.',
+                q: 'DO YOU OFFER CONSULTATION SERVICES?',
+                a: 'Yes. Custom garden setup analysis available. Submit details about your location, space, and goals.',
               },
               {
-                q: 'Can I use Nellys-Garden content for my blog?',
-                a: 'Absolutely. Most content is free to use with attribution. Contact us for commercial use.',
+                q: 'CONTENT USAGE PERMISSIONS?',
+                a: 'Most content: free with attribution. Commercial use: contact hello@nellysgarden.ng for licensing.',
               },
               {
-                q: 'How often is new content added?',
-                a: 'We update guides weekly with seasonal tips, plant profiles, and community highlights.',
+                q: 'UPDATE FREQUENCY?',
+                a: 'Weekly content deployments. Plant profiles, seasonal protocols, and community highlights monthly.',
               },
             ].map((faq, i) => (
               <div
                 key={i}
-                className="p-6 bg-white/5 border border-[#d4a574]/20 rounded-lg hover:bg-white/10 transition-all"
+                className="grid-animation group p-6 glass-pro border-2 border-[#d4a574]/40 hover:border-[#00d9ff]/80 rounded-lg transition-all hover-lift"
+                style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <h3 className="text-lg font-semibold text-white mb-2">{faq.q}</h3>
-                <p className="text-[#b0b0b0]">{faq.a}</p>
+                <h3 className="text-lg font-black text-white font-mono mb-2 group-hover:text-[#00d9ff] transition-colors">
+                  {`// ${faq.q}`}
+                </h3>
+                <p className="text-[#b0b0b0] font-light leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>

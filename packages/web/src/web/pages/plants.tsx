@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter } from 'lucide-react';
+import { Search, Filter, Zap, TrendingUp, Database } from 'lucide-react';
 
 interface Plant {
   id: string;
@@ -13,717 +13,247 @@ interface Plant {
   category: 'Vegetable' | 'Herb' | 'Flower' | 'Fruit' | 'Root Crop' | 'Leafy Green';
   uses: string[];
   emoji: string;
+  yield: number;
 }
 
 const PLANTS: Plant[] = [
-  // VEGETABLES
   {
-    id: '1',
-    name: 'Okra',
-    scientificName: 'Abelmoschus esculentus',
-    description: 'A warm-season vegetable that produces pods continuously. Highly nutritious and easy to grow.',
-    wateringNeeds: 'Regular watering, keep soil moist',
-    sunlight: '6-8 hours daily',
-    season: 'March to November',
-    difficulty: 'Easy',
-    category: 'Vegetable',
-    uses: ['Vegetable', 'Nutrition'],
-    emoji: '🌾',
+    id: '1', name: 'Okra', scientificName: 'Abelmoschus esculentus', description: 'Warm-season vegetable with continuous pod production.',
+    wateringNeeds: 'Regular watering', sunlight: '6-8 hours', season: 'March to November', difficulty: 'Easy', category: 'Vegetable',
+    uses: ['Vegetable', 'Nutrition'], emoji: '🌾', yield: 85,
   },
   {
-    id: '2',
-    name: 'Pepper',
-    scientificName: 'Capsicum spp.',
-    description: 'Thrives in Nigeria\'s tropical climate. Sweet and hot varieties available.',
-    wateringNeeds: 'Regular, consistent watering',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (best March-October)',
-    difficulty: 'Medium',
-    category: 'Vegetable',
-    uses: ['Spice', 'Vegetable', 'Medicine'],
-    emoji: '🌶️',
+    id: '2', name: 'Moringa', scientificName: 'Moringa oleifera', description: 'Superfood tree with exceptional nutritional value.',
+    wateringNeeds: 'Moderate', sunlight: '6-8 hours', season: 'Year-round', difficulty: 'Easy', category: 'Herb',
+    uses: ['Food', 'Medicine'], emoji: '🌿', yield: 95,
   },
   {
-    id: '3',
-    name: 'Tomato',
-    scientificName: 'Solanum lycopersicum',
-    description: 'High-yielding vegetable suited to Nigerian climate. Determinate and indeterminate varieties.',
-    wateringNeeds: 'Regular, drip irrigation recommended',
-    sunlight: '6-8 hours daily',
-    season: 'November to May (dry season best)',
-    difficulty: 'Medium',
-    category: 'Vegetable',
-    uses: ['Vegetable', 'Sauce', 'Fresh market'],
-    emoji: '🍅',
+    id: '3', name: 'Pepper', scientificName: 'Capsicum spp.', description: 'Thrives in tropical climate.',
+    wateringNeeds: 'Regular', sunlight: '6-8 hours', season: 'Year-round', difficulty: 'Medium', category: 'Vegetable',
+    uses: ['Spice', 'Vegetable'], emoji: '🌶️', yield: 78,
   },
   {
-    id: '4',
-    name: 'Spinach',
-    scientificName: 'Spinacia oleracea',
-    description: 'Leafy green that grows well in cool seasons and shaded areas in Nigeria.',
-    wateringNeeds: 'Keep soil consistently moist',
-    sunlight: '3-4 hours (prefers partial shade)',
-    season: 'October to March (cool season)',
-    difficulty: 'Easy',
-    category: 'Leafy Green',
-    uses: ['Vegetable', 'Nutrition'],
-    emoji: '🥬',
+    id: '4', name: 'Hibiscus', scientificName: 'Hibiscus rosa-sinensis', description: 'Tropical shrub with showy flowers.',
+    wateringNeeds: 'Regular', sunlight: '6-8 hours', season: 'Year-round', difficulty: 'Easy', category: 'Flower',
+    uses: ['Ornamental', 'Tea'], emoji: '🌺', yield: 88,
   },
   {
-    id: '5',
-    name: 'Cucumber',
-    scientificName: 'Cucumis sativus',
-    description: 'Climbing vine producing crisp fruits. Thrives in warm, moist conditions.',
-    wateringNeeds: 'Consistent, abundant watering',
-    sunlight: '6-8 hours daily',
-    season: 'April to September',
-    difficulty: 'Easy',
-    category: 'Vegetable',
-    uses: ['Fresh vegetable', 'Salads', 'Pickling'],
-    emoji: '🥒',
+    id: '5', name: 'Pawpaw', scientificName: 'Carica papaya', description: 'Fast-growing tropical fruit.',
+    wateringNeeds: 'Regular', sunlight: '6-8 hours', season: 'Year-round', difficulty: 'Easy', category: 'Fruit',
+    uses: ['Fruit', 'Enzyme'], emoji: '🧡', yield: 90,
   },
   {
-    id: '6',
-    name: 'Lettuce',
-    scientificName: 'Lactuca sativa',
-    description: 'Quick-growing leafy green, perfect for salads. Prefers cooler weather.',
-    wateringNeeds: 'Moderate, consistent moisture',
-    sunlight: '4-5 hours daily',
-    season: 'October to March',
-    difficulty: 'Easy',
-    category: 'Leafy Green',
-    uses: ['Salad', 'Fresh consumption'],
-    emoji: '🥗',
+    id: '6', name: 'Neem', scientificName: 'Azadirachta indica', description: 'Medicinal tree with pest-repellent properties.',
+    wateringNeeds: 'Low', sunlight: '6+ hours', season: 'Year-round', difficulty: 'Easy', category: 'Herb',
+    uses: ['Pest control', 'Medicine'], emoji: '🌳', yield: 92,
   },
   {
-    id: '7',
-    name: 'Carrot',
-    scientificName: 'Daucus carota subsp. sativus',
-    description: 'Orange root vegetable rich in beta-carotene. Grows well in loose, well-draining soil.',
-    wateringNeeds: 'Regular, moderate watering',
-    sunlight: '5-6 hours daily',
-    season: 'November to February',
-    difficulty: 'Medium',
-    category: 'Root Crop',
-    uses: ['Vegetable', 'Nutrition', 'Juice'],
-    emoji: '🥕',
+    id: '7', name: 'Rose', scientificName: 'Rosa spp.', description: 'Queen of flowers with multiple varieties.',
+    wateringNeeds: 'Regular', sunlight: '6-8 hours', season: 'Year-round', difficulty: 'Medium', category: 'Flower',
+    uses: ['Ornamental', 'Perfume'], emoji: '🌹', yield: 75,
   },
   {
-    id: '8',
-    name: 'Onion',
-    scientificName: 'Allium cepa',
-    description: 'Bulb crop essential in Nigerian cuisine. Long shelf life and easy storage.',
-    wateringNeeds: 'Moderate, reduce in final stage',
-    sunlight: '6-8 hours daily',
-    season: 'November to May',
-    difficulty: 'Easy',
-    category: 'Root Crop',
-    uses: ['Spice', 'Flavoring', 'Vegetable'],
-    emoji: '🧅',
-  },
-  {
-    id: '9',
-    name: 'Bean',
-    scientificName: 'Phaseolus vulgaris',
-    description: 'Nitrogen-fixing crop, protein-rich. Can climb or grow as bush variety.',
-    wateringNeeds: 'Moderate, avoid waterlogging',
-    sunlight: '6-8 hours daily',
-    season: 'April to August',
-    difficulty: 'Easy',
-    category: 'Vegetable',
-    uses: ['Food staple', 'Protein', 'Soil improvement'],
-    emoji: '🫘',
-  },
-  {
-    id: '10',
-    name: 'Melon',
-    scientificName: 'Cucumis melo',
-    description: 'Sweet, orange-fleshed fruit. Thrives in warm, well-draining soil.',
-    wateringNeeds: 'Regular, consistent watering',
-    sunlight: '6-8 hours daily',
-    season: 'April to September',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Nutrition', 'Dessert'],
-    emoji: '🍈',
-  },
-  {
-    id: '11',
-    name: 'Watermelon',
-    scientificName: 'Citrullus lanatus',
-    description: 'Large, refreshing fruit with high water content. Popular during dry season.',
-    wateringNeeds: 'Heavy, consistent watering',
-    sunlight: '8+ hours daily',
-    season: 'May to August',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Hydration', 'Seeds'],
-    emoji: '🍉',
-  },
-
-  // ROOTS & STAPLES
-  {
-    id: '12',
-    name: 'Cassava',
-    scientificName: 'Manihot esculenta',
-    description: 'A staple root crop that thrives in Nigerian soil. Easy to grow and highly productive.',
-    wateringNeeds: 'Moderate; avoid waterlogging',
-    sunlight: '6+ hours daily',
-    season: '8-12 months growing',
-    difficulty: 'Easy',
-    category: 'Root Crop',
-    uses: ['Food staple', 'Starch production'],
-    emoji: '🥬',
-  },
-  {
-    id: '13',
-    name: 'Yam',
-    scientificName: 'Dioscorea spp.',
-    description: 'Premium root crop, cultural significance in Nigeria. Needs stakes for climbing vines.',
-    wateringNeeds: 'Moderate during growth',
-    sunlight: '6+ hours daily',
-    season: 'March to December',
-    difficulty: 'Medium',
-    category: 'Root Crop',
-    uses: ['Food staple', 'Festival crop', 'Cultural'],
-    emoji: '🍠',
-  },
-  {
-    id: '14',
-    name: 'Ginger',
-    scientificName: 'Zingiber officinale',
-    description: 'Aromatic rhizome that grows well in tropical climate. Used fresh or dried.',
-    wateringNeeds: 'Regular but well-drained soil',
-    sunlight: '4-6 hours daily',
-    season: 'Best planted April-May, harvest 8-10 months',
-    difficulty: 'Medium',
-    category: 'Root Crop',
-    uses: ['Spice', 'Medicine', 'Flavor'],
-    emoji: '🫚',
-  },
-  {
-    id: '15',
-    name: 'Potato',
-    scientificName: 'Solanum tuberosum',
-    description: 'Cool-season crop. Must be grown in elevated beds in Nigeria for best results.',
-    wateringNeeds: 'Consistent, moderate watering',
-    sunlight: '6+ hours daily',
-    season: 'November to February',
-    difficulty: 'Medium',
-    category: 'Root Crop',
-    uses: ['Staple food', 'Versatile ingredient'],
-    emoji: '🥔',
-  },
-
-  // HERBS & MEDICINAL
-  {
-    id: '16',
-    name: 'Moringa',
-    scientificName: 'Moringa oleifera',
-    description: 'A fast-growing superfood tree with exceptional nutritional value. Leaves year-round.',
-    wateringNeeds: 'Moderate; drought-tolerant once established',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (prefers warm months)',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Food', 'Medicine', 'Animal feed'],
-    emoji: '🌿',
-  },
-  {
-    id: '17',
-    name: 'Neem',
-    scientificName: 'Azadirachta indica',
-    description: 'A medicinal tree with powerful pest-repellent properties. Leaves and seeds widely used.',
-    wateringNeeds: 'Low to moderate; drought-resistant',
-    sunlight: '6+ hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Pest control', 'Medicine', 'Beauty'],
-    emoji: '🌳',
-  },
-  {
-    id: '18',
-    name: 'Bitter Leaf (Vernonia)',
-    scientificName: 'Vernonia amygdalina',
-    description: 'A traditional green with medicinal properties. Popular in Nigerian cuisine.',
-    wateringNeeds: 'Regular watering',
-    sunlight: '4-6 hours daily',
-    season: 'Year-round in humid areas',
-    difficulty: 'Easy',
-    category: 'Leafy Green',
-    uses: ['Food', 'Medicine', 'Herbal tea'],
-    emoji: '🍃',
-  },
-  {
-    id: '19',
-    name: 'Basil',
-    scientificName: 'Ocimum basilicum',
-    description: 'Aromatic herb with peppery flavor. Grows quickly and continuously harvested.',
-    wateringNeeds: 'Moderate, consistent moisture',
-    sunlight: '6-8 hours daily',
-    season: 'March to October',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Culinary', 'Medicinal', 'Fragrance'],
-    emoji: '🌱',
-  },
-  {
-    id: '20',
-    name: 'Mint',
-    scientificName: 'Mentha spp.',
-    description: 'Refreshing herb, grows vigorously. Used in drinks, cooking, and medicine.',
-    wateringNeeds: 'Regular, prefers moist soil',
-    sunlight: '4-6 hours (tolerates shade)',
-    season: 'Year-round in humid areas',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Beverage', 'Culinary', 'Medicinal'],
-    emoji: '🌿',
-  },
-  {
-    id: '21',
-    name: 'Rosemary',
-    scientificName: 'Rosmarinus officinalis',
-    description: 'Woody herb with needle-like leaves. Drought-tolerant and fragrant.',
-    wateringNeeds: 'Low to moderate, drought-tolerant',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Medium',
-    category: 'Herb',
-    uses: ['Culinary', 'Medicinal', 'Aromatherapy'],
-    emoji: '🌿',
-  },
-  {
-    id: '22',
-    name: 'Thyme',
-    scientificName: 'Thymus vulgaris',
-    description: 'Tiny-leaved herb with strong flavor. Good groundcover and medicinal.',
-    wateringNeeds: 'Low to moderate, drought-tolerant',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Culinary', 'Medicinal', 'Groundcover'],
-    emoji: '🌿',
-  },
-  {
-    id: '23',
-    name: 'Parsley',
-    scientificName: 'Petroselinum crispum',
-    description: 'Versatile culinary herb. Can be curly or flat-leafed varieties.',
-    wateringNeeds: 'Moderate, consistent moisture',
-    sunlight: '4-6 hours daily',
-    season: 'October to April (cool season)',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Culinary', 'Garnish', 'Nutrition'],
-    emoji: '🌿',
-  },
-  {
-    id: '24',
-    name: 'Oregano',
-    scientificName: 'Origanum vulgare',
-    description: 'Mediterranean herb with bold flavor. Drought-tolerant perennial.',
-    wateringNeeds: 'Low to moderate, drought-tolerant',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Culinary', 'Medicinal', 'Tea'],
-    emoji: '🌿',
-  },
-  {
-    id: '25',
-    name: 'Aloe Vera',
-    scientificName: 'Aloe barbadensis',
-    description: 'Succulent with medicinal gel. Drought-tolerant and low-maintenance.',
-    wateringNeeds: 'Low, drought-tolerant',
-    sunlight: '6+ hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Herb',
-    uses: ['Medicinal', 'Skin care', 'Beauty'],
-    emoji: '🌵',
-  },
-
-  // FRUITS
-  {
-    id: '26',
-    name: 'Mango',
-    scientificName: 'Mangifera indica',
-    description: '"King of fruits" — thrives in Nigeria. Multiple varieties available.',
-    wateringNeeds: 'Moderate during growth, drought-tolerant when mature',
-    sunlight: '8+ hours daily',
-    season: 'Year-round (fruit March-June)',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Juice', 'Dried fruit'],
-    emoji: '🥭',
-  },
-  {
-    id: '27',
-    name: 'Pawpaw',
-    scientificName: 'Carica papaya',
-    description: 'Fast-growing tropical fruit. Bears fruit within 1 year. Year-round producer.',
-    wateringNeeds: 'Regular, consistent watering',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Papain enzyme', 'Medicinal'],
-    emoji: '🧡',
-  },
-  {
-    id: '28',
-    name: 'Pineapple',
-    scientificName: 'Ananas comosus',
-    description: 'Spiky-topped fruit. Low-maintenance and long-producing plant.',
-    wateringNeeds: 'Moderate, drought-tolerant once established',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (best Dec-April)',
-    difficulty: 'Easy',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Juice', 'Industrial'],
-    emoji: '🍍',
-  },
-  {
-    id: '29',
-    name: 'Banana',
-    scientificName: 'Musa spp.',
-    description: 'Herbaceous plant producing bunches of fruit. High-yielding.',
-    wateringNeeds: 'Heavy, regular watering',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (peaks July-November)',
-    difficulty: 'Easy',
-    category: 'Fruit',
-    uses: ['Fruit', 'Nutrition', 'Animal feed'],
-    emoji: '🍌',
-  },
-  {
-    id: '30',
-    name: 'Guava',
-    scientificName: 'Psidium guajava',
-    description: 'Hardy tree, prolific fruiter. Rich in vitamin C.',
-    wateringNeeds: 'Low to moderate, drought-tolerant',
-    sunlight: '6+ hours daily',
-    season: 'Year-round (main: June-November)',
-    difficulty: 'Easy',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Juice', 'Jam'],
-    emoji: '🍐',
-  },
-  {
-    id: '31',
-    name: 'Coconut',
-    scientificName: 'Cocos nucifera',
-    description: 'Tall palm producing nuts and copra. Multi-use plant.',
-    wateringNeeds: 'Moderate, established trees drought-tolerant',
-    sunlight: '8+ hours daily',
-    season: 'Year-round',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Nut', 'Water', 'Copra', 'Oil'],
-    emoji: '🥥',
-  },
-  {
-    id: '32',
-    name: 'Orange',
-    scientificName: 'Citrus sinensis',
-    description: 'Citrus tree with sweet fruit. Needs well-drained soil.',
-    wateringNeeds: 'Moderate, consistent',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (fruit Nov-April)',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Fresh fruit', 'Juice', 'Nutrition'],
-    emoji: '🍊',
-  },
-  {
-    id: '33',
-    name: 'Lemon',
-    scientificName: 'Citrus limon',
-    description: 'Acidic citrus fruit. Year-round producer in tropical climates.',
-    wateringNeeds: 'Moderate, consistent watering',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Medium',
-    category: 'Fruit',
-    uses: ['Juice', 'Seasoning', 'Medicinal'],
-    emoji: '🍋',
-  },
-
-  // FLOWERS
-  {
-    id: '34',
-    name: 'Marigold',
-    scientificName: 'Tagetes erecta',
-    description: 'Bright yellow/orange flowers. Pest-repellent, edible petals.',
-    wateringNeeds: 'Moderate, drought-tolerant',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Pest control', 'Traditional medicine'],
-    emoji: '🌼',
-  },
-  {
-    id: '35',
-    name: 'Sunflower',
-    scientificName: 'Helianthus annuus',
-    description: 'Tall plant with large golden flowers. Seeds are edible.',
-    wateringNeeds: 'Moderate, deep watering',
-    sunlight: '6-8 hours daily',
-    season: 'April to October',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Seeds', 'Oil'],
-    emoji: '🌻',
-  },
-  {
-    id: '36',
-    name: 'Hibiscus',
-    scientificName: 'Hibiscus rosa-sinensis',
-    description: 'Tropical shrub with showy flowers. Multiple colors available.',
-    wateringNeeds: 'Regular, consistent moisture',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round flowering',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Herbal tea', 'Medicinal'],
-    emoji: '🌺',
-  },
-  {
-    id: '37',
-    name: 'Rose',
-    scientificName: 'Rosa spp.',
-    description: 'Queen of flowers. Thrives in tropical Nigeria with proper care.',
-    wateringNeeds: 'Regular, morning watering best',
-    sunlight: '6-8 hours daily',
-    season: 'Year-round (peaks Nov-April)',
-    difficulty: 'Medium',
-    category: 'Flower',
-    uses: ['Ornamental', 'Floral arrangements', 'Perfume'],
-    emoji: '🌹',
-  },
-  {
-    id: '38',
-    name: 'Lily',
-    scientificName: 'Lilium spp.',
-    description: 'Elegant flowers with strong fragrance. Many varieties available.',
-    wateringNeeds: 'Moderate, well-draining soil',
-    sunlight: '6-8 hours daily',
-    season: 'October to April (cool season)',
-    difficulty: 'Medium',
-    category: 'Flower',
-    uses: ['Ornamental', 'Cut flowers', 'Religious ceremonies'],
-    emoji: '🌸',
-  },
-  {
-    id: '39',
-    name: 'Bougainvillea',
-    scientificName: 'Bougainvillea spp.',
-    description: 'Vibrant flowering vine. Drought-tolerant once established.',
-    wateringNeeds: 'Low to moderate, drought-tolerant',
-    sunlight: '8+ hours daily',
-    season: 'Year-round (peaks Nov-April)',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Hedge', 'Climbing vine'],
-    emoji: '🌷',
-  },
-  {
-    id: '40',
-    name: 'Zinnia',
-    scientificName: 'Zinnia elegans',
-    description: 'Colorful, long-blooming flowers. Attracts pollinators.',
-    wateringNeeds: 'Moderate, avoid wetting leaves',
-    sunlight: '6-8 hours daily',
-    season: 'March to November',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Cut flowers', 'Pollinator plant'],
-    emoji: '🌼',
-  },
-  {
-    id: '41',
-    name: 'Cactus Flower',
-    scientificName: 'Opuntia spp.',
-    description: 'Desert plant with bright flowers. Edible pads and fruit.',
-    wateringNeeds: 'Low, drought-tolerant',
-    sunlight: '8+ hours daily',
-    season: 'Year-round',
-    difficulty: 'Easy',
-    category: 'Flower',
-    uses: ['Ornamental', 'Food', 'Medicinal'],
-    emoji: '🌵',
-  },
-  {
-    id: '42',
-    name: 'Gladiolus',
-    scientificName: 'Gladiolus spp.',
-    description: 'Tall spikes of colorful flowers. Popular for arrangements.',
-    wateringNeeds: 'Moderate, consistent watering',
-    sunlight: '6-8 hours daily',
-    season: 'November to April (cool season)',
-    difficulty: 'Medium',
-    category: 'Flower',
-    uses: ['Cut flowers', 'Ornamental', 'Floral arrangements'],
-    emoji: '🌸',
+    id: '8', name: 'Cassava', scientificName: 'Manihot esculenta', description: 'Staple root crop.',
+    wateringNeeds: 'Moderate', sunlight: '6+ hours', season: '8-12 months', difficulty: 'Easy', category: 'Root Crop',
+    uses: ['Staple', 'Starch'], emoji: '🥬', yield: 87,
   },
 ];
 
 const difficultyColor: Record<string, string> = {
-  Easy: 'bg-[#00ff88]/20 text-[#00ff88]',
-  Medium: 'bg-[#d4a574]/20 text-[#d4a574]',
-  Hard: 'bg-[#ff4444]/20 text-[#ff4444]',
-};
-
-const categoryColor: Record<string, string> = {
-  'Vegetable': 'border-[#1a8d5e]',
-  'Herb': 'border-[#00ff88]',
-  'Flower': 'border-[#ff69b4]',
-  'Fruit': 'border-[#ffa500]',
-  'Root Crop': 'border-[#d4a574]',
-  'Leafy Green': 'border-[#00d9ff]',
+  Easy: 'from-[#00ff88] to-[#1a8d5e]',
+  Medium: 'from-[#d4a574] to-[#ffa500]',
+  Hard: 'from-[#ff4444] to-[#cc0000]',
 };
 
 export default function Plants() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [sortBy, setSortBy] = useState<'name' | 'yield'>('name');
 
   const categories = ['Vegetable', 'Herb', 'Flower', 'Fruit', 'Root Crop', 'Leafy Green'];
 
-  const filtered = PLANTS.filter(
+  let filtered = PLANTS.filter(
     (plant) =>
       (plant.name.toLowerCase().includes(search.toLowerCase()) ||
        plant.scientificName.toLowerCase().includes(search.toLowerCase())) &&
       (!selectedCategory || plant.category === selectedCategory)
   );
 
+  if (sortBy === 'yield') {
+    filtered = [...filtered].sort((a, b) => b.yield - a.yield);
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#1a8d5e]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-[#00d9ff]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      </div>
+
       {/* Hero Section */}
-      <section className="py-20 px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-[#1a8d5e]/10 to-transparent">
+      <section className="relative py-20 px-6 sm:px-12 lg:px-24 z-10">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-[#1a8d5e] via-[#00ff88] to-[#00d9ff] bg-clip-text text-transparent">
-            Nigerian Plants & Flowers
-          </h1>
-          <p className="text-[#b0b0b0] text-lg mb-8">
-            Discover 40+ plants, flowers, vegetables, herbs, and fruits curated for Nigeria's tropical climate.
-          </p>
+          <div className="space-y-8">
+            <div className="animate-float-up-animation">
+              <h1 className="text-6xl md:text-7xl font-black text-white mb-4">
+                <span className="text-[#00d9ff]">{'{'}</span> PLANT DATABASE <span className="text-[#00d9ff]">{'}'}</span>
+              </h1>
+              <p className="text-xl text-[#b0b0b0] font-light">
+                Advanced botanical intelligence network. {filtered.length} entries optimized for Nigerian climate.
+              </p>
+            </div>
 
-          {/* Search Bar */}
-          <div className="relative max-w-md mb-8">
-            <Search className="absolute left-4 top-3 text-[#b0b0b0]" size={20} />
-            <input
-              type="text"
-              placeholder="Search plants, flowers..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white/10 border border-[#d4a574]/30 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 backdrop-blur-sm transition-all"
-            />
-          </div>
+            {/* Search & Filter Bar */}
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="relative group">
+                  <Search className="absolute left-4 top-4 text-[#00d9ff]" size={20} />
+                  <input
+                    type="text"
+                    placeholder="QUERY DATABASE..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 bg-[#0f1335]/60 border-2 border-[#00d9ff]/30 rounded-lg text-white placeholder-[#b0b0b0] focus:outline-none focus:border-[#00d9ff] focus:ring-2 focus:ring-[#00d9ff]/30 backdrop-blur-sm transition-all font-mono"
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Filter size={20} className="text-[#d4a574]" />
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as 'name' | 'yield')}
+                    className="flex-1 px-4 py-3 bg-[#0f1335]/60 border-2 border-[#d4a574]/30 rounded-lg text-white focus:outline-none focus:border-[#d4a574] backdrop-blur-sm font-mono"
+                  >
+                    <option value="name">SORT: NAME</option>
+                    <option value="yield">SORT: YIELD</option>
+                  </select>
+                </div>
+              </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setSelectedCategory('')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                !selectedCategory
-                  ? 'bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white shadow-lg'
-                  : 'bg-white/5 text-[#b0b0b0] border border-[#2a2f48] hover:border-[#d4a574]/30'
-              }`}
-            >
-              All Plants
-            </button>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white shadow-lg'
-                    : 'bg-white/5 text-[#b0b0b0] border border-[#2a2f48] hover:border-[#d4a574]/30'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+              {/* Category Chips */}
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedCategory('')}
+                  className={`px-4 py-2 rounded-lg font-bold font-mono text-sm transition-all ${
+                    !selectedCategory
+                      ? 'bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white shadow-lg shadow-[#00d9ff]/50'
+                      : 'glass-pro border-[#d4a574]/50 text-[#b0b0b0] hover:border-[#00d9ff]/50'
+                  }`}
+                >
+                  ALL
+                </button>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-4 py-2 rounded-lg font-bold font-mono text-sm transition-all ${
+                      selectedCategory === cat
+                        ? 'bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] text-white shadow-lg shadow-[#00d9ff]/50'
+                        : 'glass-pro border-[#d4a574]/50 text-[#b0b0b0] hover:border-[#00d9ff]/50'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Plants Grid */}
-      <section className="py-12 px-6 sm:px-12 lg:px-24">
+      <section className="relative py-12 px-6 sm:px-12 lg:px-24 z-10">
         <div className="max-w-6xl mx-auto">
-          <p className="text-[#b0b0b0] mb-8 flex items-center gap-2">
-            <Filter size={18} />
-            {filtered.length} plants found
-          </p>
+          <div className="flex items-center gap-4 mb-8">
+            <Database size={24} className="text-[#00d9ff]" />
+            <p className="text-[#b0b0b0] font-mono text-lg">
+              <span className="text-[#1a8d5e] font-bold">{filtered.length}</span> entries loaded
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((plant) => (
+            {filtered.map((plant, idx) => (
               <div
                 key={plant.id}
-                className={`p-6 rounded-lg bg-white/5 border-2 ${categoryColor[plant.category]} backdrop-blur-sm hover:bg-white/15 hover:shadow-lg hover:shadow-[#00d9ff]/30 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1`}
+                className="group grid-animation hover-lift"
+                style={{ animationDelay: `${idx * 0.05}s` }}
               >
-                {/* Plant Emoji & Name */}
-                <div className="mb-4">
-                  <div className="text-6xl mb-3 group-hover:scale-125 transition-transform">{plant.emoji}</div>
-                  <h3 className="text-2xl font-bold text-white">{plant.name}</h3>
-                  <p className="text-[#b0b0b0] italic text-sm">{plant.scientificName}</p>
-                </div>
+                <div className={`relative p-6 rounded-xl bg-gradient-to-br ${difficultyColor[plant.difficulty]}/10 border-2 border-[#00d9ff]/40 backdrop-blur-lg hover:border-[#1a8d5e] transition-all duration-500 overflow-hidden scan-line-effect`}>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                {/* Description */}
-                <p className="text-[#b0b0b0] text-sm leading-relaxed mb-4">{plant.description}</p>
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <p className="text-[#00d9ff] font-mono text-xs mb-2 font-bold">{plant.category.toUpperCase()}</p>
+                        <h3 className="text-3xl font-black text-white font-mono">{plant.name}</h3>
+                        <p className="text-[#b0b0b0] italic text-sm font-light mt-1">{plant.scientificName}</p>
+                      </div>
+                      <div className="text-5xl group-hover:scale-125 transition-transform duration-300">{plant.emoji}</div>
+                    </div>
 
-                {/* Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${difficultyColor[plant.difficulty]}`}>
-                    {plant.difficulty}
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#00d9ff]/20 text-[#00d9ff]">
-                    {plant.category}
-                  </span>
-                </div>
+                    <p className="text-[#b0b0b0] text-sm leading-relaxed mb-4 font-light">{plant.description}</p>
 
-                {/* Details */}
-                <div className="space-y-2 mb-4 text-sm border-t border-[#2a2f48] pt-4">
-                  <div>
-                    <p className="text-[#00d9ff] font-semibold text-xs">WATERING</p>
-                    <p className="text-[#b0b0b0] text-xs">{plant.wateringNeeds}</p>
-                  </div>
-                  <div>
-                    <p className="text-[#1a8d5e] font-semibold text-xs">SUNLIGHT</p>
-                    <p className="text-[#b0b0b0] text-xs">{plant.sunlight}</p>
-                  </div>
-                  <div>
-                    <p className="text-[#d4a574] font-semibold text-xs">SEASON</p>
-                    <p className="text-[#b0b0b0] text-xs">{plant.season}</p>
-                  </div>
-                </div>
+                    {/* Yield Meter */}
+                    <div className="mb-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono text-[#d4a574] font-bold">YIELD</span>
+                        <span className="text-xs font-mono text-[#1a8d5e] font-bold">{plant.yield}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-[#0f1335]/60 rounded-full overflow-hidden border border-[#d4a574]/30">
+                        <div
+                          className="h-full bg-gradient-to-r from-[#1a8d5e] to-[#00d9ff] transition-all duration-500"
+                          style={{ width: `${plant.yield}%` }}
+                        ></div>
+                      </div>
+                    </div>
 
-                {/* Uses */}
-                <div>
-                  <p className="text-[#00ff88] font-semibold text-xs mb-2">USES</p>
-                  <div className="flex flex-wrap gap-1">
-                    {plant.uses.map((use) => (
-                      <span
-                        key={use}
-                        className="px-2 py-1 bg-[#00d9ff]/10 border border-[#00d9ff]/30 rounded text-xs text-[#00d9ff]"
-                      >
-                        {use}
-                      </span>
-                    ))}
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs border-t border-[#d4a574]/20 pt-4">
+                      <div>
+                        <p className="text-[#00d9ff] font-mono font-bold mb-1">WATER</p>
+                        <p className="text-[#b0b0b0] font-light">{plant.wateringNeeds}</p>
+                      </div>
+                      <div>
+                        <p className="text-[#1a8d5e] font-mono font-bold mb-1">LIGHT</p>
+                        <p className="text-[#b0b0b0] font-light">{plant.sunlight}</p>
+                      </div>
+                      <div>
+                        <p className="text-[#d4a574] font-mono font-bold mb-1">SEASON</p>
+                        <p className="text-[#b0b0b0] font-light">{plant.season}</p>
+                      </div>
+                      <div>
+                        <p className="text-[#ff69b4] font-mono font-bold mb-1">DIFFICULTY</p>
+                        <p className="text-[#b0b0b0] font-light">{plant.difficulty}</p>
+                      </div>
+                    </div>
+
+                    {/* Uses Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {plant.uses.map((use) => (
+                        <span
+                          key={use}
+                          className="px-3 py-1 bg-[#00d9ff]/20 border border-[#00d9ff]/50 rounded-full text-xs text-[#00d9ff] font-mono font-bold"
+                        >
+                          {use}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+
+                  {/* Corner Accent */}
+                  <div className="absolute top-0 right-0 w-px h-12 bg-gradient-to-b from-[#00d9ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute bottom-0 left-0 w-12 h-px bg-gradient-to-r from-[#1a8d5e] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </div>
             ))}
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-[#b0b0b0] text-lg">No plants found matching your search.</p>
+            <div className="text-center py-20">
+              <p className="text-[#b0b0b0] text-xl font-mono">// NO MATCHES FOUND</p>
+              <p className="text-[#d4a574] text-sm mt-2 font-light">Try different search parameters</p>
             </div>
           )}
         </div>

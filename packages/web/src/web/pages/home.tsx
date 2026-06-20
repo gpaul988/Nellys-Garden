@@ -1,89 +1,143 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Leaf, Droplets, Sun, AlertCircle, Sprout, Zap } from 'lucide-react';
+import { ArrowRight, Sprout, Zap, Github, Cpu } from 'lucide-react';
 
 export default function Home() {
-  const [animatedCount, setAnimatedCount] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [textIndex, setTextIndex] = useState(0);
+
+  const heroTexts = ['Grow', 'Cultivate', 'Harvest', 'Transform'];
 
   useEffect(() => {
-    if (animatedCount < 40) {
-      const timer = setTimeout(() => setAnimatedCount(animatedCount + 1), 20);
-      return () => clearTimeout(timer);
-    }
-  }, [animatedCount]);
+    const timer = setInterval(() => {
+      setTextIndex((prev) => (prev + 1) % heroTexts.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] overflow-hidden">
-      {/* Animated Background Orbs */}
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+      {/* Advanced Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-[#1a8d5e]/20 rounded-full blur-3xl animate-pulse"></div>
+        {/* Animated Orbs */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#1a8d5e]/15 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#00d9ff]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-[#d4a574]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Glitch Lines */}
+        <div className="absolute top-1/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00d9ff]/20 to-transparent" style={{ animation: 'scan-line 4s linear infinite' }}></div>
+        <div className="absolute top-2/3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#1a8d5e]/20 to-transparent" style={{ animation: 'scan-line 5s linear infinite', animationDelay: '2s' }}></div>
+
+        {/* Cursor Glow */}
+        <div 
+          className="absolute w-40 h-40 bg-[#00d9ff]/10 rounded-full blur-3xl pointer-events-none"
+          style={{
+            left: `${mousePos.x - 80}px`,
+            top: `${mousePos.y - 80}px`,
+            transition: 'all 0.3s ease-out',
+          }}
+        ></div>
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-6 sm:px-12 lg:px-24 pt-32 z-10">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="relative py-24 px-6 sm:px-12 lg:px-24 pt-40 z-10 min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto w-full">
           <div className="space-y-8 animate-fade-in">
-            <div>
-              <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-[#1a8d5e]/20 to-[#00d9ff]/20 border border-[#00d9ff]/40 rounded-full">
-                <p className="text-[#00d9ff] text-sm font-semibold">🌱 Nigerian Horticulture Revolution</p>
+            {/* Top Badge */}
+            <div className="inline-block animate-float-up-animation">
+              <div className="glass-pro px-6 py-3 rounded-full border border-[#00d9ff]/50">
+                <p className="text-[#00d9ff] text-sm font-bold flex items-center gap-2">
+                  <Cpu size={16} /> FUTURISTIC HORTICULTURE V2.0
+                </p>
               </div>
-              <h1 className="text-6xl sm:text-7xl font-black text-white leading-tight mb-4 bg-gradient-to-r from-[#1a8d5e] via-[#00ff88] to-[#00d9ff] bg-clip-text text-transparent">
-                Grow Your Nigeria Garden
-              </h1>
-              <p className="text-xl text-[#b0b0b0] leading-relaxed">
-                Master futuristic tropical horticulture with {animatedCount < 40 ? animatedCount : '40'}+ plants, climate-smart tips, and a thriving Nigerian gardening community.
-              </p>
             </div>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-[#1a8d5e] to-[#00ff88] hover:from-[#158550] hover:to-[#00dd77] text-white rounded-lg font-bold flex items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:shadow-[#00ff88]/40 transform hover:scale-105">
-                Explore All Plants <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="px-8 py-4 border-2 border-[#d4a574] text-[#d4a574] hover:text-white hover:border-white hover:bg-white/5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm">
-                View Guides
-              </button>
-            </div>
-          </div>
 
-          {/* 3D-like Card */}
-          <div className="relative h-96 rounded-xl overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1a8d5e]/30 to-[#00d9ff]/20 backdrop-blur-lg border border-[#d4a574]/30 flex items-center justify-center group-hover:border-[#00d9ff]/60 transition-all duration-500 shadow-2xl shadow-[#00d9ff]/20">
-              <div className="text-center">
-                <Sprout size={120} className="text-[#1a8d5e]/60 mx-auto mb-4 group-hover:text-[#00d9ff]/80 transition-colors" />
-                <p className="text-[#d4a574] font-bold text-lg">The Future of Farming</p>
+            {/* Main Headline with Animation */}
+            <div className="space-y-4">
+              <div className="text-7xl sm:text-8xl font-black leading-tight h-24">
+                <div className="gradient-animate">
+                  {heroTexts[textIndex]} Your Nigeria
+                </div>
               </div>
-              {/* Animated Border */}
-              <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-[#1a8d5e] via-[#00d9ff] to-[#d4a574] bg-clip-border opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+              <h1 className="text-6xl sm:text-7xl font-black text-white leading-tight">
+                Garden <span className="neon-text">[NEXUS]</span>
+              </h1>
+            </div>
+
+            {/* Subheading */}
+            <div className="space-y-4 max-w-2xl">
+              <p className="text-xl text-[#b0b0b0] leading-relaxed font-light">
+                Experience the evolution of tropical gardening. Harness AI-powered insights, access 40+ scientifically-curated plants, and join a revolution of Nigerian horticulturists building the future of food security.
+              </p>
+              <div className="flex gap-1 text-[#00d9ff] text-sm font-mono">
+                <span>{'>'}</span>
+                <span className="animate-pulse">ONLINE</span>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 pt-8">
+              <button className="btn-cyber group relative px-10 py-4 bg-gradient-to-r from-[#1a8d5e] via-[#00ff88] to-[#00d9ff] text-white font-bold rounded-lg overflow-hidden hover:shadow-2xl hover:shadow-[#00d9ff]/60 transition-all duration-300 transform hover:scale-105">
+                <span className="relative z-10 flex items-center gap-2">
+                  INITIALIZE GARDEN <ArrowRight size={20} />
+                </span>
+              </button>
+              <button className="group px-10 py-4 border-2 border-[#d4a574] text-[#d4a574] font-bold rounded-lg hover:bg-[#d4a574]/10 transition-all duration-300 cyber-border">
+                DOCUMENTATION
+              </button>
+            </div>
+
+            {/* Tech Stats */}
+            <div className="grid grid-cols-3 gap-6 max-w-md pt-12">
+              {[
+                { label: '40+', desc: 'PLANTS' },
+                { label: '100%', desc: 'ORGANIC' },
+                { label: '2.8K', desc: 'GARDENERS' },
+              ].map((stat, i) => (
+                <div key={i} className="glass-pro-dark p-4 rounded-lg border border-[#00d9ff]/30 text-center hover-lift" style={{ animationDelay: `${i * 0.1}s` }}>
+                  <p className="text-2xl font-black text-[#00ff88] glow-green">{stat.label}</p>
+                  <p className="text-xs text-[#b0b0b0] uppercase tracking-wider mt-1">{stat.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Plants Section */}
-      <section className="py-20 px-6 sm:px-12 lg:px-24 relative z-10">
+      {/* Featured Section */}
+      <section className="relative py-24 px-6 sm:px-12 lg:px-24 z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <span className="text-[#00d9ff] text-sm font-bold uppercase tracking-wider">Popular Choices</span>
-            <h2 className="text-5xl font-black text-white mb-2 bg-gradient-to-r from-white to-[#b0b0b0] bg-clip-text text-transparent">
-              Featured Nigerian Plants
-            </h2>
-            <p className="text-[#b0b0b0] text-lg">Start with plants that thrive in our climate</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-5xl font-black text-white mb-4">
+            <span className="text-[#00d9ff]">{'<'}</span> Featured Ecosystem <span className="text-[#00d9ff]">{'/>'}</span>
+          </h2>
+          <p className="text-[#b0b0b0] mb-12 text-lg font-light">Next-generation plants designed for tropical dominance</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: 'Moringa', desc: 'Superfood tree with year-round nutrition', icon: '🌿', color: 'from-[#1a8d5e]' },
-              { name: 'Hibiscus Flower', desc: 'Stunning blooms & herbal tea', icon: '🌺', color: 'from-[#ff69b4]' },
-              { name: 'Pawpaw', desc: 'Fast-growing tropical fruit', icon: '🧡', color: 'from-[#ffa500]' },
-            ].map((plant) => (
+              { name: 'MORINGA.ai', desc: 'Superfood Intelligence', icon: '🌿', color: 'border-[#1a8d5e]' },
+              { name: 'NEXUS.flora', desc: 'Flower Analytics', icon: '🌺', color: 'border-[#ff69b4]' },
+              { name: 'HARVEST.pro', desc: 'Fruit Maximization', icon: '🧡', color: 'border-[#ffa500]' },
+            ].map((plant, i) => (
               <div
-                key={plant.name}
-                className={`group relative p-6 rounded-xl bg-gradient-to-br ${plant.color} to-transparent opacity-20 border border-[#d4a574]/30 backdrop-blur-sm hover:opacity-100 transition-all duration-300 cursor-pointer overflow-hidden`}
+                key={i}
+                className={`group relative p-8 rounded-xl bg-[#0f1335]/80 border-2 ${plant.color} backdrop-blur-lg hover-lift scan-line-effect transition-all duration-500 overflow-hidden`}
+                style={{ animationDelay: `${i * 0.15}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
-                  <div className="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">{plant.icon}</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{plant.name}</h3>
-                  <p className="text-[#b0b0b0] group-hover:text-white transition-colors">{plant.desc}</p>
+                  <div className="text-6xl mb-4 group-hover:scale-150 transition-transform duration-300">{plant.icon}</div>
+                  <h3 className="text-2xl font-black text-white font-mono mb-2">{plant.name}</h3>
+                  <p className="text-[#b0b0b0] font-light">{plant.desc}</p>
+                  <div className="mt-4 flex items-center gap-2 text-[#00d9ff] font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="h-1 w-8 bg-[#00d9ff]"></span>
+                    ACTIVE
+                  </div>
                 </div>
               </div>
             ))}
@@ -91,77 +145,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quick Tips Section */}
-      <section className="py-20 px-6 sm:px-12 lg:px-24 relative z-10 bg-gradient-to-r from-[#1a8d5e]/5 to-[#00d9ff]/5">
+      {/* Data Flow Section */}
+      <section className="relative py-24 px-6 sm:px-12 lg:px-24 z-10 bg-gradient-to-r from-[#1a8d5e]/5 to-[#00d9ff]/5">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-black text-white mb-12">Gardening Essentials</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-5xl font-black text-white mb-12">
+            <span className="text-[#1a8d5e]">{'>_'}</span> System Architecture
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { icon: Droplets, title: 'Water Daily', desc: 'Early mornings (5-7 AM) prevent evaporation' },
-              { icon: Sun, title: 'Sunlight Critical', desc: '6-8 hours for most crops, shade cloth in peak heat' },
-              { icon: AlertCircle, title: 'Pest Management', desc: 'Neem spray, companion planting, no chemicals' },
-              { icon: Leaf, title: 'Rich Soil', desc: 'Mix loamy soil + compost + organic matter' },
+              { icon: Sprout, title: 'CULTIVATION', value: '40+' },
+              { icon: Zap, title: 'OPTIMIZATION', value: '100%' },
+              { icon: Cpu, title: 'PROCESSING', value: '2.8K' },
+              { icon: ArrowRight, title: 'EXPANSION', value: '∞' },
             ].map((item, i) => (
               <div
                 key={i}
-                className="group p-6 rounded-lg bg-white/5 border border-[#d4a574]/30 backdrop-blur-sm hover:bg-white/10 hover:border-[#00d9ff]/60 hover:shadow-lg hover:shadow-[#00d9ff]/20 transition-all duration-300"
+                className="group p-6 rounded-lg glass-pro border border-[#d4a574]/40 hover:border-[#00d9ff]/80 transition-all duration-300 hover-lift text-center"
+                style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <item.icon className="text-[#00d9ff] mb-4 group-hover:scale-125 transition-transform group-hover:text-[#1a8d5e]" size={36} />
-                <h3 className="font-bold text-white mb-2 text-lg">{item.title}</h3>
-                <p className="text-sm text-[#b0b0b0] group-hover:text-white transition-colors">{item.desc}</p>
+                <item.icon className="w-12 h-12 mx-auto mb-4 text-[#00d9ff] group-hover:text-[#1a8d5e] transition-colors" />
+                <p className="text-sm font-mono text-[#d4a574] group-hover:text-[#00d9ff] transition-colors font-bold">{item.title}</p>
+                <p className="text-3xl font-black text-white mt-2 gradient-animate">{item.value}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 px-6 sm:px-12 lg:px-24 relative z-10">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { number: '40+', label: 'Plants & Flowers', icon: '🌱' },
-            { number: '2.8K+', label: 'Active Gardeners', icon: '👥' },
-            { number: '6', label: 'Growing Guides', icon: '📚' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center p-8 rounded-xl bg-gradient-to-br from-[#1a8d5e]/10 to-[#00d9ff]/10 border border-[#d4a574]/20 hover:border-[#00d9ff]/60 transition-all group">
-              <div className="text-6xl mb-4 group-hover:scale-125 transition-transform">{stat.icon}</div>
-              <p className="text-5xl font-black text-transparent bg-gradient-to-r from-[#00ff88] to-[#00d9ff] bg-clip-text mb-2">
-                {stat.number}
-              </p>
-              <p className="text-[#b0b0b0] text-lg font-semibold">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6 sm:px-12 lg:px-24 relative z-10">
-        <div className="max-w-4xl mx-auto text-center p-8 rounded-2xl bg-gradient-to-r from-[#1a8d5e]/20 to-[#00d9ff]/20 border-2 border-[#d4a574]/40 backdrop-blur-lg">
-          <Zap className="mx-auto mb-6 text-[#d4a574]" size={48} />
-          <h2 className="text-5xl font-black text-white mb-4">Ready to Transform Your Garden?</h2>
-          <p className="text-[#b0b0b0] mb-8 text-xl leading-relaxed">
-            Join thousands of Nigerian gardeners mastering tropical horticulture with expert guides and community support.
-          </p>
-          <button className="px-12 py-5 bg-gradient-to-r from-[#1a8d5e] via-[#00ff88] to-[#00d9ff] text-white rounded-xl font-black text-lg hover:shadow-2xl hover:shadow-[#00ff88]/50 transition-all duration-300 transform hover:scale-105">
-            Explore 40+ Plants Now →
-          </button>
+      {/* Call to Action */}
+      <section className="relative py-24 px-6 sm:px-12 lg:px-24 z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="glass-pro-dark p-12 rounded-2xl border-2 border-[#00d9ff]/50 hover:border-[#1a8d5e] transition-all duration-300">
+            <p className="text-[#00d9ff] font-mono text-sm mb-4 animate-pulse">// INITIATING PHASE SHIFT</p>
+            <h2 className="text-5xl font-black text-white mb-6 neon-text">
+              READY FOR LAUNCH?
+            </h2>
+            <p className="text-[#b0b0b0] text-xl mb-8 max-w-2xl mx-auto font-light">
+              Step into the future of Nigerian horticulture. Access cutting-edge growing guides, plant analytics, and connect with the community.
+            </p>
+            <button className="btn-cyber px-12 py-5 bg-gradient-to-r from-[#00d9ff] to-[#1a8d5e] text-[#0a0e27] font-black text-lg rounded-lg hover:shadow-2xl hover:shadow-[#00d9ff]/60 transition-all transform hover:scale-110">
+              ENTER NEXUS →
+            </button>
+          </div>
         </div>
       </section>
 
       <style>{`
         @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
+        .animate-fade-in { animation: fade-in 0.8s ease-out; }
       `}</style>
     </div>
   );
