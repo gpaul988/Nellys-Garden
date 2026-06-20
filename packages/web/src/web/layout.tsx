@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, Leaf } from 'lucide-react';
+import { BroadcastBanner } from './components/broadcast-banner';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,8 +19,11 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27]">
+      {/* Broadcast Banner */}
+      <BroadcastBanner />
+      
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0e27]/60 backdrop-blur-xl border-b border-[#d4a574]/20 shadow-xl shadow-[#00d9ff]/5 hover:border-[#00d9ff]/30 transition-all duration-300">
+      <header className="sticky top-16 z-40 bg-[#0a0e27]/60 backdrop-blur-xl border-b border-[#d4a574]/20 shadow-xl shadow-[#00d9ff]/5 hover:border-[#00d9ff]/30 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-4 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200 cursor-pointer">

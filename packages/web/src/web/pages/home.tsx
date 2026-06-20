@@ -111,16 +111,18 @@ export default function Home() {
 
               {/* Main Headline */}
               <div className="space-y-6">
-                <div className="relative h-32">
-                  <div className="absolute inset-0 flex items-center">
-                    <h1 className="text-7xl sm:text-8xl font-black leading-tight transition-all duration-700">
+                <div className="relative h-auto">
+                  <div className="flex flex-col gap-2">
+                    <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight transition-all duration-700 whitespace-normal">
                       <span className="gradient-animate text-transparent bg-clip-text">
                         {heroTexts[textIndex]}
                       </span>
-                      <br />
-                      <span className="text-white">Your Nigeria</span>
-                      <br />
-                      <span className="neon-text text-[#1a8d5e]">[GARDEN]</span>
+                    </h1>
+                    <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight text-white">
+                      Your Nigeria
+                    </h1>
+                    <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight neon-text text-[#1a8d5e]">
+                      [GARDEN]
                     </h1>
                   </div>
                 </div>
