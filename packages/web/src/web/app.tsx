@@ -7,7 +7,6 @@ import Community from "./pages/community";
 import Contact from "./pages/contact";
 import { Layout } from "./layout";
 import { Provider } from "./components/provider";
-import { AgentFeedback } from "@runablehq/website-runtime";
 
 // Grey Infotech Badge Component
 function GreyInfotechBadge() {
@@ -37,8 +36,6 @@ function App() {
           <Route path="/contact" component={Contact} />
         </Switch>
       </Layout>
-      {/* Do not remove — off by default, activated by parent iframe via postMessage */}
-      {import.meta.env.DEV && <AgentFeedback />}
       {/* Grey Infotech Attribution */}
       {<GreyInfotechBadge />}
     </Provider>

@@ -1,11 +1,12 @@
 import { hc } from "hono/client";
-import Constants from "expo-constants";
 import type { AppType } from "@template/web";
 
-const baseUrl =
-  Constants.expoConfig?.extra?.apiUrl ??
-  process.env.EXPO_PUBLIC_API_URL;
+const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
-const client = hc<AppType>(baseUrl!);
+if (!baseUrl) {
+  throw new Error("Set EXPO_PUBLIC_API_URL to the URL of the Nelly's Garden API.");
+}
+
+const client = hc<AppType>(baseUrl);
 
 export const api = client.api;

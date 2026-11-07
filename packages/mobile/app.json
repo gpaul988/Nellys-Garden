@@ -2,19 +2,15 @@
   "expo": {
     "icon": "./assets/icon.png",
     "android": {
-      "package": "com.appId.runable",
+      "package": "com.nellysgarden.mobile",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
     },
-    "extra": {
-      "apiUrl": "https://nellysg-8xtxeyt-preview-4200.runable.site/",
-      "applicationId": "nellysg-8xtxeyt"
-    },
     "ios": {
-      "bundleIdentifier": "com.appId.runable",
+      "bundleIdentifier": "com.nellysgarden.mobile",
       "supportsTablet": true
     },
     "splash": {
@@ -22,10 +18,10 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Nelly's Garden",
+    "slug": "nellys-garden",
     "version": "1.0.0",
-    "scheme": "mobile",
+    "scheme": "nellys-garden",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
