@@ -1,45 +1,32 @@
+import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
+import { readFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { Hono } from "hono";
 import app from "./api";
 
 const port = Number(process.env.PORT ?? 3000);
-const distDir = `${import.meta.dir}/../dist`;
-const indexPath = `${distDir}/index.html`;
+const distDir = resolve(dirname(fileURLToPath(import.meta.url)), "../dist");
+const indexPath = resolve(distDir, "index.html");
 
-const server = Bun.serve({
-  port,
-  async fetch(request) {
-    const url = new URL(request.url);
+const serverApp = new Hono();
 
-    if (url.pathname.startsWith("/api")) {
-      return app.fetch(request);
-    }
+serverApp.route("/", app);
+serverApp.use("*", serveStatic({ root: distDir }));
+serverApp.get("*", async (c) => {
+  try {
+    return c.html(await readFile(indexPath, "utf8"));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
 
-    const filePath = getStaticFilePath(url.pathname);
-    const file = Bun.file(filePath);
-
-    if (await file.exists()) {
-      return new Response(file);
-    }
-
-    const index = Bun.file(indexPath);
-    if (await index.exists()) {
-      return new Response(index, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
-    }
-
-    return new Response("Build output not found. Run `bun run build` first.", {
-      status: 500,
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
-    });
-  },
+    return c.text(
+      "Build output not found. Run `npm run build --workspace=@template/web` first.",
+      500,
+    );
+  }
 });
 
-console.log(`Web server listening on http://localhost:${server.port}`);
-
-function getStaticFilePath(pathname: string) {
-  const cleanPath = decodeURIComponent(pathname)
-    .replace(/^\/+/, "")
-    .replaceAll("..", "");
-
-  return cleanPath ? `${distDir}/${cleanPath}` : indexPath;
-}
+serve({ fetch: serverApp.fetch, port }, (info) => {
+  console.log(`Web server listening on http://localhost:${info.port}`);
+});

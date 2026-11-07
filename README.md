@@ -1,6 +1,17 @@
-# sandbox-app-template
+# Nelly's Garden
 
-Monorepo: Bun workspaces + Turborepo.
+Monorepo: npm workspaces + Turborepo.
+
+## Getting Started
+
+Use Node.js 20.19.4 or newer. Install dependencies with npm, then start the web app and API:
+
+```sh
+npm install
+npm run dev
+```
+
+Use `npm run dev:mobile` to start the mobile app or `npm run dev:desktop` to start the desktop app.
 
 ## Project Structure
 
@@ -12,7 +23,6 @@ packages/
     index.html               Frontend HTML entry
     vite/plugins/
       hono-dev-plugin.ts     Intercepts /api/* in dev, forwards to Hono via SSR
-      runable-analytics-plugin.ts
     src/
       api/
         index.ts             Hono routes (.basePath('api')) + AppType export
@@ -44,7 +54,9 @@ packages/
 
 ## Environment Variables
 
-Secrets and credentials live in `.env` at the project root (gitignored). Vite's `loadEnv` loads them into `process.env` at dev/build time (configured in `packages/web/vite.config.ts`). In API code (Hono), use `process.env.YOUR_VAR`. In browser code, only `VITE_`-prefixed vars are exposed via `import.meta.env.VITE_YOUR_VAR`. Drizzle scripts use `bun --env-file=../../.env` to load env vars directly.
+Secrets and credentials live in `.env` at the project root (gitignored). Vite's `loadEnv` loads them into `process.env` at dev/build time (configured in `packages/web/vite.config.ts`). In API code (Hono), use `process.env.YOUR_VAR`. In browser code, only `VITE_`-prefixed vars are exposed via `import.meta.env.VITE_YOUR_VAR`. The Node server and database scripts load the root `.env` file.
+
+The mobile app connects to the API URL in `EXPO_PUBLIC_API_URL`. Copy `packages/mobile/.env.example` to `packages/mobile/.env` for local development. For a physical device, use your machine's LAN address; for the Android emulator, use `http://10.0.2.2:4200`.
 
 ## Desktop UI
 
@@ -57,9 +69,8 @@ Dev servers are started and managed automatically — no need to run them manual
 ## Database
 
 ```sh
-cd packages/web
-bun run db:push        # Push schema to database
-bun run db:generate    # Generate migration files
-bun run db:migrate     # Run migrations
-bun run db:studio      # Open Drizzle Studio
+npm run db:push        # Push schema to database
+npm run db:generate    # Generate migration files
+npm run db:migrate     # Run migrations
+npm run db:studio      # Open Drizzle Studio
 ```

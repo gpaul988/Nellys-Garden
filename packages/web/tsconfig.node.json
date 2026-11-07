@@ -11,7 +11,7 @@
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"types": [
-			"bun"
+			"node"
 		],
 		"isolatedModules": true,
 		"moduleDetection": "force",
