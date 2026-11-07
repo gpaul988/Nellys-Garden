@@ -37,7 +37,7 @@ export default function Community() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] overflow-hidden relative">
       {/* Hero */}
       <section className="relative py-20 px-6 sm:px-12 lg:px-24 z-10">
         <div className="max-w-6xl mx-auto space-y-8 animate-float-up-animation">
@@ -89,7 +89,7 @@ export default function Community() {
               {stories.map((story, idx) => (
                 <div
                   key={story.id}
-                  className="group grid-animation p-6 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect"
+                  className="group grid-animation p-6 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden"
                   style={{ animationDelay: `${idx * 0.05}s` }}
                 >
                   <div className="relative z-10">

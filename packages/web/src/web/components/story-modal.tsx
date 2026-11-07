@@ -71,15 +71,6 @@ export function StoryModal({ isOpen, onClose, onStorySubmitted }: StoryModalProp
         <div className="glass-pro-dark border-2 border-[#d4a574]/60 rounded-2xl overflow-hidden shadow-2xl shadow-[#00d9ff]/30">
           {/* Header */}
           <div className="relative bg-gradient-to-r from-[#1a8d5e]/20 via-[#00d9ff]/10 to-transparent border-b border-[#d4a574]/40 p-8">
-            {/* Background Grid */}
-            <div className="absolute inset-0 opacity-20" style={{
-              backgroundImage: `
-                linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent)
-              `,
-              backgroundSize: '80px 80px',
-            }}></div>
-
             <div className="relative z-10 flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-3">

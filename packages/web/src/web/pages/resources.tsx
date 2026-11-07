@@ -2,7 +2,7 @@ import { Calendar, Droplet, Leaf, AlertCircle, CheckCircle, TrendingUp, Gauge, C
 
 export default function Resources() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] overflow-hidden relative">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00d9ff]/5 to-[#1a8d5e]/10"></div>
@@ -161,7 +161,7 @@ export default function Resources() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect">
+            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden">
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
                   <Clock className="text-[#d4a574]" size={28} />
@@ -189,7 +189,7 @@ export default function Resources() {
               </div>
             </div>
 
-            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e]/80 transition-all hover-lift overflow-hidden scan-line-effect" style={{ animationDelay: '0.1s' }}>
+            <div className="grid-animation group p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e]/80 transition-all hover-lift overflow-hidden" style={{ animationDelay: '0.1s' }}>
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
                   <AlertCircle className="text-[#00d9ff]" size={28} />

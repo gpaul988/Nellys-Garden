@@ -91,7 +91,7 @@ export default function Tips() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] relative overflow-hidden">
       {/* Dynamic Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a8d5e]/10 via-transparent to-transparent"></div>
@@ -131,7 +131,7 @@ export default function Tips() {
                 className="group grid-animation hover-lift"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className="relative p-8 rounded-xl glass-pro-dark border-2 border-[#d4a574]/40 group-hover:border-[#00d9ff]/80 transition-all duration-500 overflow-hidden scan-line-effect">
+                <div className="relative p-8 rounded-xl glass-pro-dark border-2 border-[#d4a574]/40 group-hover:border-[#00d9ff]/80 transition-all duration-500 overflow-hidden">
                   {/* Top Accent Bar */}
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${section.color} to-transparent`}></div>
 

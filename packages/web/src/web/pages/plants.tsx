@@ -84,7 +84,7 @@ export default function Plants() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] relative overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#1a8d5e]/10 rounded-full blur-3xl animate-pulse"></div>
@@ -178,7 +178,7 @@ export default function Plants() {
                 className="group grid-animation hover-lift"
                 style={{ animationDelay: `${idx * 0.05}s` }}
               >
-                <div className={`relative p-6 rounded-xl bg-gradient-to-br ${difficultyColor[plant.difficulty]}/10 border-2 border-[#00d9ff]/40 backdrop-blur-lg hover:border-[#1a8d5e] transition-all duration-500 overflow-hidden scan-line-effect`}>
+                <div className={`relative p-6 rounded-xl bg-gradient-to-br ${difficultyColor[plant.difficulty]}/10 border-2 border-[#00d9ff]/40 backdrop-blur-lg hover:border-[#1a8d5e] transition-all duration-500 overflow-hidden`}>
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 

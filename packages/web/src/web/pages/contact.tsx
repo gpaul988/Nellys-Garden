@@ -25,7 +25,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] overflow-hidden relative">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#00d9ff]/10 rounded-full blur-3xl animate-pulse"></div>
@@ -60,7 +60,7 @@ export default function Contact() {
             ].map((item, i) => (
               <div
                 key={i}
-                className={`group grid-animation p-6 glass-pro border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden scan-line-effect`}
+                className={`group grid-animation p-6 glass-pro border-2 border-[#d4a574]/40 rounded-xl hover:border-[#00d9ff]/80 transition-all hover-lift overflow-hidden`}
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
                 <div className="relative z-10">
@@ -87,7 +87,7 @@ export default function Contact() {
           <div className="lg:col-span-2">
             <form
               onSubmit={handleSubmit}
-              className="p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e] transition-all overflow-hidden scan-line-effect"
+              className="p-8 glass-pro-dark border-2 border-[#d4a574]/40 rounded-xl hover:border-[#1a8d5e] transition-all overflow-hidden"
             >
               <div className="space-y-6">
                 {/* Name */}

@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] tech-grid overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f1335] to-[#0a0e27] overflow-hidden relative">
       {/* Advanced Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Massive Gradient Orbs */}
@@ -67,15 +67,6 @@ export default function Home() {
           }}
         ></div>
 
-        {/* Animated Grid Lines */}
-        <div className="absolute inset-0 opacity-30" style={{
-          backgroundImage: `
-            linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent)
-          `,
-          backgroundSize: '80px 80px',
-        }}></div>
-
         {/* Cursor Glow */}
         <div 
           className="absolute w-60 h-60 bg-[#00d9ff]/15 rounded-full blur-3xl pointer-events-none"
@@ -86,12 +77,6 @@ export default function Home() {
           }}
         ></div>
 
-        {/* Scan Lines */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'linear-gradient(0deg, transparent 0%, rgba(0, 217, 255, 0.03) 50%, transparent 100%)',
-          backgroundSize: '100% 2px',
-          animation: 'scan-line 8s linear infinite',
-        }}></div>
       </div>
 
       {/* ===== HERO SECTION ===== */}
@@ -249,7 +234,7 @@ export default function Home() {
                 <button
                   key={i}
                   onClick={() => navigateTo(plant.path)}
-                  className={`group relative p-8 rounded-xl bg-[#0f1335]/80 border-2 ${plant.color} backdrop-blur-lg hover-lift scan-line-effect transition-all duration-500 overflow-hidden text-left hover:border-[#00d9ff] cursor-pointer`}
+                  className={`group relative p-8 rounded-xl bg-[#0f1335]/80 border-2 ${plant.color} backdrop-blur-lg hover-lift transition-all duration-500 overflow-hidden text-left hover:border-[#00d9ff] cursor-pointer`}
                   style={{ animationDelay: `${i * 0.15}s` }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
