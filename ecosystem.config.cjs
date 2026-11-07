@@ -2,11 +2,10 @@ module.exports = {
   apps: [
     {
       name: "web-app",
-      // Bun only auto-loads .env from its cwd — run from the repo root so the
-      // root .env (DATABASE_URL etc.) reaches the server on every spawn.
       cwd: __dirname,
       script: "packages/web/src/server.ts",
-      interpreter: "bun",
+      interpreter: "node",
+      interpreter_args: "--env-file-if-exists=.env --import tsx",
       exec_mode: "fork",
       instances: 1,
       autorestart: true,
